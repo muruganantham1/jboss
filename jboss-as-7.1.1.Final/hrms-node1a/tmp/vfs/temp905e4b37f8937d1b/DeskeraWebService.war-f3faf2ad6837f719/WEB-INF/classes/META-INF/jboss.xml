@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jboss>
+    <loader-repository>
+        com.frogstore:loader=HopinFrogstoreService.jar
+    </loader-repository>
+</jboss>

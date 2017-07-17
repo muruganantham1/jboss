@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hrms.master.MasterData">
+    <id name="id" type="string">
+      <column name="id"/>
+      <generator class="uuid"/>
+    </id>
+    <many-to-one class="com.krawler.hrms.master.Master" column="masterid" name="masterid"/>
+    <property column="value" name="value" type="string"/>
+    <property column="code" name="code" type="string"/>
+    <property column="glid" name="glid" type="string"/>
+    <property name="weightage" type="integer">
+      <column name="weightage" default='0' not-null="true"/>
+    </property>
+     <property name="isActive" type="integer">
+      <column name="is_active" default='1' not-null="true"/>
+    </property>
+     <property column="Billing_Under" name="billingUnder" type="string"/>
+     <property name="componenttype" type="integer">
+      <column name="componenttype" default='0' not-null="true"/>
+    </property>
+    <property name="worktime" type="string">
+      <column name="worktime"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    <set inverse="true" name="managecmpts">
+      <key>
+        <column name="desid" not-null="true"/>
+      </key>
+      <one-to-many class="com.krawler.hrms.performance.Managecmpt"/>
+    </set>
+  </class>
+</hibernate-mapping>

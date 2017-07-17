@@ -1,0 +1,64 @@
+/*
+ * Copyright (C) 2012  Krawler Information Systems Pvt Ltd
+ * All rights reserved.
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+#odl-logo {
+	float: left;
+	width: 415px;
+	padding: 0px;
+	background-image: url(../images/k-hrms.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+	height: 46px;	
+}
+
+.odl-banner-text-big{
+    width:56%;
+    padding:0px;
+    margin:0px;
+    float:left;
+    text-align:right;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:25px;
+    color:#FFFFFF;
+    display:block;
+    padding:40px 10px 40px 0px;
+}
+
+#odl-middle-bg {
+	background-color: #FFFFFF;
+	text-align: left;
+	margin: auto;
+	width: 512px;
+	padding-right: 11px;
+	padding-left: 11px;
+	padding-top: 11px;
+}
+
+#odl-middle {
+	margin: auto;
+	width: 534px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 25px;
+	padding-left: 0px;
+}
+.companylogo {
+    border:none;
+    float:left;
+    margin-top:11px;
+}

@@ -1,0 +1,108 @@
+/*
+ * Copyright (C) 2012  Krawler Information Systems Pvt Ltd
+ * All rights reserved.
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+/* 
+    Document   : ie8hax
+    Created on : Aug 21, 2009, 12:30:00 AM
+    Author     : krawler
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.x-date-menu > ul{
+    display: inline;
+}
+
+.x-date-menu > ul li{
+    display: inline;
+}
+.x-form-invalid-icon {
+background:transparent url(../images/default/form/exclamation.gif) no-repeat scroll 0 2px;
+display:block;
+height:18px;
+left:0;
+position:relative;
+top:0;
+visibility:hidden;
+width:16px;
+}
+
+/*Button */
+.x-menu {
+    width: auto !important;
+}
+
+/*Checkbox*/
+#checkisdefault{
+    padding-top:2px !important;
+}
+
+/*Button Text position*/
+.x-btn-text-icon .x-btn-center .x-btn-text{
+    padding-top:1px !important;
+    padding-left:21px !important;
+}
+
+/*Combo & Date field*/
+.wtf-ie .x-form-text {
+    top:1px !important;
+    margin-top:0px !important;
+    margin-bottom:0px !important;
+    width:0 !important;
+}
+/* to remove .. which is added before text Total in assign competency */
+.x-grid3-cell-inner{
+    padding-right : 0px !important;
+}
+.pwndRefresh{
+	 background-position: 0 -1011px !important;
+}
+
+#rules{
+	margin-bottom:5px !important;
+}
+
+#subrules{
+	padding-top:8px !important;
+	padding-bottom:10px !important;
+}
+
+/*CSS for Switch app menu*/
+#shortcutmenu1 .x-btn BUTTON {
+    padding-top : 0px;
+}
+
+.notification-menu {
+    display: inline;
+}
+
+.mainMenu1 {
+    margin-top:-11px;
+    top: 33px !important;
+}
+
+.pipilinks {
+    display : inline;
+    vertical-align: top;
+}

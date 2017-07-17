@@ -1,0 +1,47 @@
+/*
+ * Copyright (C) 2012  Krawler Information Systems Pvt Ltd
+ * All rights reserved.
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+#x-debug-browser .x-tree .x-tree-node a span {
+    color:#222297;
+    font-size:11px;
+    padding-top:2px;
+    font-family:"monotype","courier new",sans-serif;
+    line-height:18px;
+}
+#x-debug-browser .x-tree a i {
+    color:#FF4545;
+    font-style:normal;
+}
+#x-debug-browser .x-tree a em {
+    color:#999;
+}
+#x-debug-browser .x-tree .x-tree-node .x-tree-selected a span{
+    background:#EEE;
+}
+#x-debug-browser  .x-tool-toggle {
+    background-position:0 -75px;
+}
+#x-debug-browser  .x-tool-toggle-over {
+    background-position:-15px -75px;
+}
+#x-debug-browser.x-panel-collapsed .x-tool-toggle {
+    background-position:0 -60px;
+}
+#x-debug-browser.x-panel-collapsed .x-tool-toggle-over {
+    background-position:-15px -60px;
+}

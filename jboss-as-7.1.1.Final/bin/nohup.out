@@ -1,0 +1,1072 @@
+DIRNAME=`dirname "$0"`
+dirname "$0"
+++ dirname ./standalone.sh
++ DIRNAME=.
+PROGNAME=`basename "$0"`
+basename "$0"
+++ basename ./standalone.sh
++ PROGNAME=standalone.sh
+GREP="grep"
++ GREP=grep
+
+# Use the maximum available, or set MAX_FD != -1 to use that
+MAX_FD="maximum"
++ MAX_FD=maximum
+
+# OS specific support (must be 'true' or 'false').
+cygwin=false;
++ cygwin=false
+darwin=false;
++ darwin=false
+linux=false;
++ linux=false
+case "`uname`" in
+    CYGWIN*)
+        cygwin=true
+        ;;
+
+    Darwin*)
+        darwin=true
+        ;;
+
+    Linux)
+        linux=true
+        ;;
+esac
++ case "`uname`" in
+uname
+++ uname
++ linux=true
+
+# Read an optional running configuration file
+if [ "x$RUN_CONF" = "x" ]; then
+    RUN_CONF="$DIRNAME/standalone.conf"
+fi
++ '[' x = x ']'
++ RUN_CONF=./standalone.conf
+if [ -r "$RUN_CONF" ]; then
+    . "$RUN_CONF"
+fi
++ '[' -r ./standalone.conf ']'
++ . ./standalone.conf
+## -*- shell-script -*- ######################################################
+##                                                                          ##
+##  JBoss Bootstrap Script Configuration                                    ##
+##                                                                          ##
+##############################################################################
+
+#
+# This file is optional; it may be removed if not needed.
+#
+
+#
+# Specify the maximum file descriptor limit, use "max" or "maximum" to use
+# the default, as queried by the system.
+#
+# Defaults to "maximum"
+#
+#MAX_FD="maximum"
+
+#
+# Specify the profiler configuration file to load.
+#
+# Default is to not load profiler configuration file.
+#
+#PROFILER=""
+
+#
+# Specify the location of the Java home directory.  If set then $JAVA will
+# be defined to $JAVA_HOME/bin/java, else $JAVA will be "java".
+#
+#JAVA_HOME="/opt/jboss/j2sdk_linux"
+JAVA_HOME="/opt/jboss/java/jdk1.7.0_10"
+++ JAVA_HOME=/opt/jboss/java/jdk1.7.0_10
+#
+# Specify the exact Java VM executable to use.
+#
+#JAVA=""
+
+if [ "x$JBOSS_MODULES_SYSTEM_PKGS" = "x" ]; then
+   JBOSS_MODULES_SYSTEM_PKGS="org.jboss.byteman"
+fi
+++ '[' x = x ']'
+++ JBOSS_MODULES_SYSTEM_PKGS=org.jboss.byteman
+
+# Uncomment the following line to prevent manipulation of JVM options
+# by shell scripts.
+#
+#PRESERVE_JAVA_OPTS=true
+
+#
+# Specify options to pass to the Java VM.
+#
+if [ "x$JAVA_OPTS" = "x" ]; then
+   JAVA_OPTS="-Xms2048m -Xmx2048m -XX:MaxPermSize=512m  -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError=\"/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p\" -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 "
+   JAVA_OPTS=" $JAVA_OPTS -Djboss.modules.system.pkgs=$JBOSS_MODULES_SYSTEM_PKGS -Djava.awt.headless=true"
+   JAVA_OPTS=" $JAVA_OPTS -Djboss.server.default.config=standalone.xml"
+else
+   echo "JAVA_OPTS already set in environment; overriding default settings with values: $JAVA_OPTS"
+fi
+++ '[' x = x ']'
+++ JAVA_OPTS='-Xms2048m -Xmx2048m -XX:MaxPermSize=512m  -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p" -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 '
+++ JAVA_OPTS=' -Xms2048m -Xmx2048m -XX:MaxPermSize=512m  -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p" -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000  -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true'
+++ JAVA_OPTS='  -Xms2048m -Xmx2048m -XX:MaxPermSize=512m  -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p" -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000  -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml'
+
+# Sample JPDA settings for remote socket debugging
+#JAVA_OPTS="$JAVA_OPTS -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n"
+
+# Sample JPDA settings for shared memory debugging
+#JAVA_OPTS="$JAVA_OPTS -Xrunjdwp:transport=dt_shmem,server=y,suspend=n,address=jboss"
+
+# Uncomment to not use JBoss Modules lockless mode
+#JAVA_OPTS="$JAVA_OPTS -Djboss.modules.lockless=false"
+
+# Uncomment to gather JBoss Modules metrics
+#JAVA_OPTS="$JAVA_OPTS -Djboss.modules.metrics=true"
+
+
+# For Cygwin, ensure paths are in UNIX format before anything is touched
+if $cygwin ; then
+    [ -n "$JBOSS_HOME" ] &&
+        JBOSS_HOME=`cygpath --unix "$JBOSS_HOME"`
+    [ -n "$JAVA_HOME" ] &&
+        JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
+    [ -n "$JAVAC_JAR" ] &&
+        JAVAC_JAR=`cygpath --unix "$JAVAC_JAR"`
+fi
++ false
+
+# Setup JBOSS_HOME
+RESOLVED_JBOSS_HOME=`cd "$DIRNAME/.."; pwd`
+cd "$DIRNAME/.."; pwd
+++ cd ./..
+++ pwd
++ RESOLVED_JBOSS_HOME=/opt/jboss/jboss-as-7.1.1.Final
+if [ "x$JBOSS_HOME" = "x" ]; then
+    # get the full path (without any relative bits)
+    JBOSS_HOME=$RESOLVED_JBOSS_HOME
+else
+ SANITIZED_JBOSS_HOME=`cd "$JBOSS_HOME"; pwd`
+ if [ "$RESOLVED_JBOSS_HOME" != "$SANITIZED_JBOSS_HOME" ]; then
+   echo "WARNING JBOSS_HOME may be pointing to a different installation - unpredictable results may occur."
+   echo ""
+ fi
+fi
++ '[' x = x ']'
++ JBOSS_HOME=/opt/jboss/jboss-as-7.1.1.Final
+export JBOSS_HOME
++ export JBOSS_HOME
+
+#JAVA_OPTS="-agentpath:/opt/jprofiler/bin/linux-x64/libjprofilerti.so=port=8580,nowait $JAVA_OPTS"
+
+#export JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.port=8780 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
+
+# Setup the JVM
+if [ "x$JAVA" = "x" ]; then
+    if [ "x$JAVA_HOME" != "x" ]; then
+        JAVA="$JAVA_HOME/bin/java"
+    else
+        JAVA="java"
+    fi
+fi
++ '[' x = x ']'
++ '[' x/opt/jboss/java/jdk1.7.0_10 '!=' x ']'
++ JAVA=/opt/jboss/java/jdk1.7.0_10/bin/java
+
+if [ "$PRESERVE_JAVA_OPTS" != "true" ]; then
+    # Check for -d32/-d64 in JAVA_OPTS
+    JVM_D64_OPTION=`echo $JAVA_OPTS | $GREP "\-d64"`
+    JVM_D32_OPTION=`echo $JAVA_OPTS | $GREP "\-d32"`
+
+    # Check If server or client is specified
+    SERVER_SET=`echo $JAVA_OPTS | $GREP "\-server"`
+    CLIENT_SET=`echo $JAVA_OPTS | $GREP "\-client"`
+
+    if [ "x$JVM_D32_OPTION" != "x" ]; then
+        JVM_OPTVERSION="-d32"
+    elif [ "x$JVM_D64_OPTION" != "x" ]; then
+        JVM_OPTVERSION="-d64"
+    elif $darwin && [ "x$SERVER_SET" = "x" ]; then
+        # Use 32-bit on Mac, unless server has been specified or the user opts are incompatible
+        "$JAVA"  -d32 $JAVA_OPTS -version > /dev/null 2>&1 && PREPEND_JAVA_OPTS="-d32" && JVM_OPTVERSION="-d32"
+    fi
+
+    CLIENT_VM=false
+    if [ "x$CLIENT_SET" != "x" ]; then
+        CLIENT_VM=true
+    elif [ "x$SERVER_SET" = "x" ]; then
+        if $darwin && [ "$JVM_OPTVERSION" = "-d32" ]; then
+            # Prefer client for Macs, since they are primarily used for development
+            CLIENT_VM=true
+            PREPEND_JAVA_OPTS="$PREPEND_JAVA_OPTS -client"
+        else
+            PREPEND_JAVA_OPTS="$PREPEND_JAVA_OPTS -server"
+        fi
+    fi
+
+    if [ $CLIENT_VM = false ]; then
+        NO_COMPRESSED_OOPS=`echo $JAVA_OPTS | $GREP "\-XX:\-UseCompressedOops"`
+        if [ "x$NO_COMPRESSED_OOPS" = "x" ]; then
+            "$JAVA"   $JVM_OPTVERSION -server -XX:+UseCompressedOops -version >/dev/null 2>&1 && PREPEND_JAVA_OPTS="$PREPEND_JAVA_OPTS -XX:+UseCompressedOops"
+        fi
+
+        NO_TIERED_COMPILATION=`echo $JAVA_OPTS | $GREP "\-XX:\-TieredCompilation"`
+        if [ "x$NO_TIERED_COMPILATION" = "x" ]; then
+            "$JAVA"  $JVM_OPTVERSION -server -XX:+TieredCompilation -version >/dev/null 2>&1 && PREPEND_JAVA_OPTS="$PREPEND_JAVA_OPTS -XX:+TieredCompilation"
+        fi
+    fi
+
+    JAVA_OPTS="$PREPEND_JAVA_OPTS $JAVA_OPTS"
+fi
++ '[' '' '!=' true ']'
+echo $JAVA_OPTS | $GREP "\-d64"
+++ grep '\-d64'
+++ echo -Xms2048m -Xmx2048m -XX:MaxPermSize=512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError '-XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh' '%p"' -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml
++ JVM_D64_OPTION=
+echo $JAVA_OPTS | $GREP "\-d32"
+++ echo -Xms2048m -Xmx2048m -XX:MaxPermSize=512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError '-XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh' '%p"' -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml
+++ grep '\-d32'
++ JVM_D32_OPTION=
+echo $JAVA_OPTS | $GREP "\-server"
+++ grep '\-server'
+++ echo -Xms2048m -Xmx2048m -XX:MaxPermSize=512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError '-XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh' '%p"' -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml
++ SERVER_SET='-Xms2048m -Xmx2048m -XX:MaxPermSize=512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p" -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml'
+echo $JAVA_OPTS | $GREP "\-client"
+++ echo -Xms2048m -Xmx2048m -XX:MaxPermSize=512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError '-XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh' '%p"' -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml
+++ grep '\-client'
++ CLIENT_SET=
++ '[' x '!=' x ']'
++ '[' x '!=' x ']'
++ false
++ CLIENT_VM=false
++ '[' x '!=' x ']'
++ '[' 'x-Xms2048m -Xmx2048m -XX:MaxPermSize=512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p" -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml' = x ']'
++ '[' false = false ']'
+echo $JAVA_OPTS | $GREP "\-XX:\-UseCompressedOops"
+++ grep '\-XX:\-UseCompressedOops'
+++ echo -Xms2048m -Xmx2048m -XX:MaxPermSize=512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError '-XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh' '%p"' -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml
++ NO_COMPRESSED_OOPS=
++ '[' x = x ']'
++ /opt/jboss/java/jdk1.7.0_10/bin/java -server -XX:+UseCompressedOops -version
++ PREPEND_JAVA_OPTS=' -XX:+UseCompressedOops'
+echo $JAVA_OPTS | $GREP "\-XX:\-TieredCompilation"
+++ grep '\-XX:\-TieredCompilation'
+++ echo -Xms2048m -Xmx2048m -XX:MaxPermSize=512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError '-XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh' '%p"' -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml
++ NO_TIERED_COMPILATION=
++ '[' x = x ']'
++ /opt/jboss/java/jdk1.7.0_10/bin/java -server -XX:+TieredCompilation -version
++ PREPEND_JAVA_OPTS=' -XX:+UseCompressedOops -XX:+TieredCompilation'
++ JAVA_OPTS=' -XX:+UseCompressedOops -XX:+TieredCompilation   -Xms2048m -Xmx2048m -XX:MaxPermSize=512m  -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p" -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000  -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml'
+
+if [ "x$JBOSS_MODULEPATH" = "x" ]; then
+    JBOSS_MODULEPATH="$JBOSS_HOME/modules"
+fi
++ '[' x = x ']'
++ JBOSS_MODULEPATH=/opt/jboss/jboss-as-7.1.1.Final/modules
+
+if $linux; then
+    # consolidate the server and command line opts
+    SERVER_OPTS="$JAVA_OPTS $@"
+    # process the standalone options
+    for var in $SERVER_OPTS
+    do
+       case $var in
+         -Djboss.server.base.dir=*)
+              JBOSS_BASE_DIR=`readlink -m ${var#*=}`
+              ;;
+         -Djboss.server.log.dir=*)
+              JBOSS_LOG_DIR=`readlink -m ${var#*=}`
+              ;;
+         -Djboss.server.config.dir=*)
+              JBOSS_CONFIG_DIR=`readlink -m ${var#*=}`
+              ;;
+       esac
+    done
+fi
++ true
++ SERVER_OPTS=' -XX:+UseCompressedOops -XX:+TieredCompilation   -Xms2048m -Xmx2048m -XX:MaxPermSize=512m  -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p" -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000  -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml -c standalone-ha.xml -Djboss.bind.address=10.28.20.176 -Djboss.server.base.dir=/opt/jboss/jboss-as-7.1.1.Final//sps-IOT-node2 -Djboss.node.name=sps-IOT-node2 -Djboss.socket.binding.port-offset=100 -Djboss.bind.address.management=10.28.26.176'
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
+readlink -m ${var#*=}
+++ readlink -m /opt/jboss/jboss-as-7.1.1.Final//sps-IOT-node2
++ JBOSS_BASE_DIR=/opt/jboss/jboss-as-7.1.1.Final/sps-IOT-node2
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
++ for var in '$SERVER_OPTS'
++ case $var in
+# determine the default base dir, if not set
+if [ "x$JBOSS_BASE_DIR" = "x" ]; then
+   JBOSS_BASE_DIR="$JBOSS_HOME/standalone"
+fi
++ '[' x/opt/jboss/jboss-as-7.1.1.Final/sps-IOT-node2 = x ']'
+# determine the default log dir, if not set
+if [ "x$JBOSS_LOG_DIR" = "x" ]; then
+   JBOSS_LOG_DIR="$JBOSS_BASE_DIR/log"
+fi
++ '[' x = x ']'
++ JBOSS_LOG_DIR=/opt/jboss/jboss-as-7.1.1.Final/sps-IOT-node2/log
+# determine the default configuration dir, if not set
+if [ "x$JBOSS_CONFIG_DIR" = "x" ]; then
+   JBOSS_CONFIG_DIR="$JBOSS_BASE_DIR/configuration"
+fi
++ '[' x = x ']'
++ JBOSS_CONFIG_DIR=/opt/jboss/jboss-as-7.1.1.Final/sps-IOT-node2/configuration
+
+# For Cygwin, switch paths to Windows format before running java
+if $cygwin; then
+    JBOSS_HOME=`cygpath --path --windows "$JBOSS_HOME"`
+    JAVA_HOME=`cygpath --path --windows "$JAVA_HOME"`
+    JBOSS_MODULEPATH=`cygpath --path --windows "$JBOSS_MODULEPATH"`
+    JBOSS_BASE_DIR=`cygpath --path --windows "$JBOSS_BASE_DIR"`
+    JBOSS_LOG_DIR=`cygpath --path --windows "$JBOSS_LOG_DIR"`
+    JBOSS_CONFIG_DIR=`cygpath --path --windows "$JBOSS_CONFIG_DIR"`
+fi
++ false
+
+# Display our environment
+echo "========================================================================="
++ echo =========================================================================
+=========================================================================
+echo ""
++ echo ''
+
+echo "  JBoss Bootstrap Environment"
++ echo '  JBoss Bootstrap Environment'
+  JBoss Bootstrap Environment
+echo ""
++ echo ''
+
+echo "  JBOSS_HOME: $JBOSS_HOME"
++ echo '  JBOSS_HOME: /opt/jboss/jboss-as-7.1.1.Final'
+  JBOSS_HOME: /opt/jboss/jboss-as-7.1.1.Final
+echo ""
++ echo ''
+
+echo "  JAVA: $JAVA"
++ echo '  JAVA: /opt/jboss/java/jdk1.7.0_10/bin/java'
+  JAVA: /opt/jboss/java/jdk1.7.0_10/bin/java
+echo ""
++ echo ''
+
+echo "  JAVA_OPTS: $JAVA_OPTS"
++ echo '  JAVA_OPTS:  -XX:+UseCompressedOops -XX:+TieredCompilation   -Xms2048m -Xmx2048m -XX:MaxPermSize=512m  -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p" -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000  -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml'
+  JAVA_OPTS:  -XX:+UseCompressedOops -XX:+TieredCompilation   -Xms2048m -Xmx2048m -XX:MaxPermSize=512m  -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p" -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000  -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml
+echo ""
++ echo ''
+
+echo "========================================================================="
++ echo =========================================================================
+=========================================================================
+echo ""
++ echo ''
+
+
+while true; do
+   if [ "x$LAUNCH_JBOSS_IN_BACKGROUND" = "x" ]; then
+      # Execute the JVM in the foreground
+      eval \"$JAVA\"  -D\"[Standalone]\" $JAVA_OPTS \
+         \"-Dorg.jboss.boot.log.file=$JBOSS_LOG_DIR/boot.log\" \
+         \"-Dlogging.configuration=file:$JBOSS_CONFIG_DIR/logging.properties\" \
+         -jar \"$JBOSS_HOME/jboss-modules.jar\" \
+         -mp \"${JBOSS_MODULEPATH}\" \
+         -jaxpmodule "javax.xml.jaxp-provider" \
+         org.jboss.as.standalone \
+         -Djboss.home.dir=\"$JBOSS_HOME\" \
+         "$@"
+      JBOSS_STATUS=$?
+   else
+      # Execute the JVM in the background
+      eval \"$JAVA\"  -D\"[Standalone]\" $JAVA_OPTS \
+         \"-Dorg.jboss.boot.log.file=$JBOSS_LOG_DIR/boot.log\" \
+         \"-Dlogging.configuration=file:$JBOSS_CONFIG_DIR/logging.properties\" \
+         -jar \"$JBOSS_HOME/jboss-modules.jar\" \
+         -mp \"${JBOSS_MODULEPATH}\" \
+         -jaxpmodule "javax.xml.jaxp-provider" \
+         org.jboss.as.standalone \
+         -Djboss.home.dir=\"$JBOSS_HOME\" \
+         "$@" "&"
+      JBOSS_PID=$!
+      # Trap common signals and relay them to the jboss process
+      trap "kill -HUP  $JBOSS_PID" HUP
+      trap "kill -TERM $JBOSS_PID" INT
+      trap "kill -QUIT $JBOSS_PID" QUIT
+      trap "kill -PIPE $JBOSS_PID" PIPE
+      trap "kill -TERM $JBOSS_PID" TERM
+      if [ "x$JBOSS_PIDFILE" != "x" ]; then
+        echo $JBOSS_PID > $JBOSS_PIDFILE
+      fi
+      # Wait until the background process exits
+      WAIT_STATUS=128
+      while [ "$WAIT_STATUS" -ge 128 ]; do
+         wait $JBOSS_PID 2>/dev/null
+         WAIT_STATUS=$?
+         if [ "$WAIT_STATUS" -gt 128 ]; then
+            SIGNAL=`expr $WAIT_STATUS - 128`
+            SIGNAL_NAME=`kill -l $SIGNAL`
+            echo "*** JBossAS process ($JBOSS_PID) received $SIGNAL_NAME signal ***" >&2
+         fi
+      done
+      if [ "$WAIT_STATUS" -lt 127 ]; then
+         JBOSS_STATUS=$WAIT_STATUS
+      else
+         JBOSS_STATUS=0
+      fi
+      if [ "$JBOSS_STATUS" -ne 10 ]; then
+            # Wait for a complete shudown
+            wait $JBOSS_PID 2>/dev/null
+      fi
+      if [ "x$JBOSS_PIDFILE" != "x" ]; then
+            grep "$JBOSS_PID" $JBOSS_PIDFILE && rm $JBOSS_PIDFILE
+      fi
+   fi
+   if [ "$JBOSS_STATUS" -eq 10 ]; then
+      echo "Restarting JBoss..."
+   else
+      exit $JBOSS_STATUS
+   fi
+done
++ true
++ '[' x = x ']'
++ eval '"/opt/jboss/java/jdk1.7.0_10/bin/java"' '-D"[Standalone]"' -XX:+UseCompressedOops -XX:+TieredCompilation -Xms2048m -Xmx2048m -XX:MaxPermSize=512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError '-XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh' '%p"' -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml '"-Dorg.jboss.boot.log.file=/opt/jboss/jboss-as-7.1.1.Final/sps-IOT-node2/log/boot.log"' '"-Dlogging.configuration=file:/opt/jboss/jboss-as-7.1.1.Final/sps-IOT-node2/configuration/logging.properties"' -jar '"/opt/jboss/jboss-as-7.1.1.Final/jboss-modules.jar"' -mp '"/opt/jboss/jboss-as-7.1.1.Final/modules"' -jaxpmodule javax.xml.jaxp-provider org.jboss.as.standalone '-Djboss.home.dir="/opt/jboss/jboss-as-7.1.1.Final"' -c standalone-ha.xml -Djboss.bind.address=10.28.20.176 -Djboss.server.base.dir=/opt/jboss/jboss-as-7.1.1.Final//sps-IOT-node2 -Djboss.node.name=sps-IOT-node2 -Djboss.socket.binding.port-offset=100 -Djboss.bind.address.management=10.28.26.176
+"/opt/jboss/java/jdk1.7.0_10/bin/java" -D"[Standalone]" -XX:+UseCompressedOops -XX:+TieredCompilation -Xms2048m -Xmx2048m -XX:MaxPermSize=512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError="/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p" -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml "-Dorg.jboss.boot.log.file=/opt/jboss/jboss-as-7.1.1.Final/sps-IOT-node2/log/boot.log" "-Dlogging.configuration=file:/opt/jboss/jboss-as-7.1.1.Final/sps-IOT-node2/configuration/logging.properties" -jar "/opt/jboss/jboss-as-7.1.1.Final/jboss-modules.jar" -mp "/opt/jboss/jboss-as-7.1.1.Final/modules" -jaxpmodule javax.xml.jaxp-provider org.jboss.as.standalone -Djboss.home.dir="/opt/jboss/jboss-as-7.1.1.Final" -c standalone-ha.xml -Djboss.bind.address=10.28.20.176 -Djboss.server.base.dir=/opt/jboss/jboss-as-7.1.1.Final//sps-IOT-node2 -Djboss.node.name=sps-IOT-node2 -Djboss.socket.binding.port-offset=100 -Djboss.bind.address.management=10.28.26.176
+++ /opt/jboss/java/jdk1.7.0_10/bin/java '-D[Standalone]' -XX:+UseCompressedOops -XX:+TieredCompilation -Xms2048m -Xmx2048m -XX:MaxPermSize=512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError '-XX:OnOutOfMemoryError=/opt/jboss/jboss-as-7.1.1.Final/bin/ofm-restart-server.sh %p' -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml -Dorg.jboss.boot.log.file=/opt/jboss/jboss-as-7.1.1.Final/sps-IOT-node2/log/boot.log -Dlogging.configuration=file:/opt/jboss/jboss-as-7.1.1.Final/sps-IOT-node2/configuration/logging.properties -jar /opt/jboss/jboss-as-7.1.1.Final/jboss-modules.jar -mp /opt/jboss/jboss-as-7.1.1.Final/modules -jaxpmodule javax.xml.jaxp-provider org.jboss.as.standalone -Djboss.home.dir=/opt/jboss/jboss-as-7.1.1.Final -c standalone-ha.xml -Djboss.bind.address=10.28.20.176 -Djboss.server.base.dir=/opt/jboss/jboss-as-7.1.1.Final//sps-IOT-node2 -Djboss.node.name=sps-IOT-node2 -Djboss.socket.binding.port-offset=100 -Djboss.bind.address.management=10.28.26.176
+17:38:04,545 INFO  [org.jboss.modules] JBoss Modules version 1.1.1.GA
+17:38:04,780 INFO  [org.jboss.msc] JBoss MSC version 1.0.2.GA
+17:38:04,848 INFO  [org.jboss.as] JBAS015899: JBoss AS 7.1.1.Final "Brontes" starting
+17:38:07,090 INFO  [org.xnio] XNIO Version 3.0.3.GA
+17:38:07,092 INFO  [org.jboss.as.server] JBAS015888: Creating http management service using socket-binding (management-http)
+17:38:07,115 INFO  [org.xnio.nio] XNIO NIO Implementation Version 3.0.3.GA
+17:38:07,136 INFO  [org.jboss.remoting] JBoss Remoting version 3.2.3.GA
+17:38:07,157 INFO  [org.jboss.as.logging] JBAS011502: Removing bootstrap log handlers
+17:38:07,173 INFO  [org.jboss.as.configadmin] (ServerService Thread Pool -- 28) JBAS016200: Activating ConfigAdmin Subsystem
+17:38:07,207 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 33) JBAS010280: Activating Infinispan subsystem.
+17:38:07,233 INFO  [org.jboss.as.clustering.jgroups] (ServerService Thread Pool -- 37) JBAS010260: Activating JGroups subsystem.
+17:38:07,277 INFO  [org.jboss.as.osgi] (ServerService Thread Pool -- 43) JBAS011940: Activating OSGi Subsystem
+17:38:07,282 INFO  [org.jboss.as.naming] (ServerService Thread Pool -- 42) JBAS011800: Activating Naming Subsystem
+17:38:07,325 INFO  [org.jboss.as.security] (ServerService Thread Pool -- 48) JBAS013101: Activating Security Subsystem
+17:38:07,367 INFO  [org.jboss.as.webservices] (ServerService Thread Pool -- 52) JBAS015537: Activating WebServices Extension
+17:38:07,370 INFO  [org.jboss.as.connector] (MSC service thread 1-3) JBAS010408: Starting JCA Subsystem (JBoss IronJacamar 1.0.9.Final)
+17:38:07,370 INFO  [org.jboss.as.security] (MSC service thread 1-4) JBAS013100: Current PicketBox version=4.0.7.Final
+17:38:07,496 INFO  [org.jboss.as.naming] (MSC service thread 1-2) JBAS011802: Starting Naming Service
+17:38:07,528 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-7) JBAS015400: Bound mail session [java:jboss/mail/Default]
+17:38:07,720 INFO  [org.jboss.as.connector.subsystems.datasources] (ServerService Thread Pool -- 29) JBAS010403: Deploying JDBC-compliant driver class org.h2.Driver (version 1.3)
+17:38:07,813 INFO  [org.jboss.as.connector.subsystems.datasources] (ServerService Thread Pool -- 29) JBAS010404: Deploying non-JDBC-compliant driver class com.mysql.jdbc.Driver (version 5.1)
+17:38:07,870 INFO  [org.jboss.ws.common.management.AbstractServerConfig] (MSC service thread 1-12) JBoss Web Services - Stack CXF Server 4.0.2.GA
+17:38:07,906 ERROR [org.apache.coyote.ajp.AjpProtocol] (MSC service thread 1-5) Error initializing endpoint: java.net.BindException: Address already in use /10.28.20.176:8109
+	at org.apache.tomcat.util.net.JIoEndpoint.init(JIoEndpoint.java:983) [jbossweb-7.0.13.Final.jar:]
+	at org.apache.coyote.ajp.AjpProtocol.init(AjpProtocol.java:173) [jbossweb-7.0.13.Final.jar:]
+	at org.apache.catalina.connector.Connector.init(Connector.java:983) [jbossweb-7.0.13.Final.jar:]
+	at org.jboss.as.web.WebConnectorService.start(WebConnectorService.java:267) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_10]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_10]
+	at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_10]
+
+17:38:07,905 ERROR [org.apache.coyote.http11.Http11Protocol] (MSC service thread 1-7) Error initializing endpoint: java.net.BindException: Address already in use /10.28.20.176:8180
+	at org.apache.tomcat.util.net.JIoEndpoint.init(JIoEndpoint.java:983) [jbossweb-7.0.13.Final.jar:]
+	at org.apache.coyote.http11.Http11Protocol.init(Http11Protocol.java:190) [jbossweb-7.0.13.Final.jar:]
+	at org.apache.catalina.connector.Connector.init(Connector.java:983) [jbossweb-7.0.13.Final.jar:]
+	at org.jboss.as.web.WebConnectorService.start(WebConnectorService.java:267) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_10]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_10]
+	at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_10]
+
+17:38:07,951 ERROR [org.jboss.msc.service.fail] (MSC service thread 1-7) MSC00001: Failed to start service jboss.web.connector.http: org.jboss.msc.service.StartException in service jboss.web.connector.http: JBAS018007: Error starting web connector
+	at org.jboss.as.web.WebConnectorService.start(WebConnectorService.java:271)
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_10]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_10]
+	at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_10]
+Caused by: LifecycleException:  Protocol handler initialization failed: java.net.BindException: Address already in use /10.28.20.176:8180
+	at org.apache.catalina.connector.Connector.init(Connector.java:985)
+	at org.jboss.as.web.WebConnectorService.start(WebConnectorService.java:267)
+	... 5 more
+
+17:38:07,952 ERROR [org.jboss.msc.service.fail] (MSC service thread 1-5) MSC00001: Failed to start service jboss.web.connector.ajp: org.jboss.msc.service.StartException in service jboss.web.connector.ajp: JBAS018007: Error starting web connector
+	at org.jboss.as.web.WebConnectorService.start(WebConnectorService.java:271)
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_10]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_10]
+	at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_10]
+Caused by: LifecycleException:  Protocol handler initialization failed: java.net.BindException: Address already in use /10.28.20.176:8109
+	at org.apache.catalina.connector.Connector.init(Connector.java:985)
+	at org.jboss.as.web.WebConnectorService.start(WebConnectorService.java:267)
+	... 5 more
+
+17:38:08,082 INFO  [org.jboss.modcluster.ModClusterService] (MSC service thread 1-13) Initializing mod_cluster 1.2.0.Final
+17:38:08,195 INFO  [org.jboss.modcluster.advertise.impl.AdvertiseListenerImpl] (MSC service thread 1-13) Listening to proxy advertisements on 224.0.1.105:23364
+17:38:08,446 INFO  [org.infinispan.configuration.cache.EvictionConfigurationBuilder] (ServerService Thread Pool -- 33) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be pasivated.
+17:38:08,459 INFO  [org.infinispan.configuration.cache.EvictionConfigurationBuilder] (ServerService Thread Pool -- 33) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be pasivated.
+17:38:08,627 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-8) JBAS010400: Bound data source [java:jboss/datasources/defaultdb]
+17:38:08,627 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-11) JBAS010400: Bound data source [java:jboss/datasources/defaultdbAnn]
+17:38:08,627 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-16) JBAS010400: Bound data source [java:jboss/datasources/etlRepotdb]
+17:38:08,607 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-5) JBAS010400: Bound data source [java:jboss/datasources/ExampleDS]
+17:38:08,770 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-5) JBAS015012: Started FileSystemDeploymentService for directory /opt/jboss/jboss-as-7.1.1.Final/sps-IOT-node2/deployments
+17:38:08,784 INFO  [org.jboss.as.server.deployment.scanner] (DeploymentScanner-threads - 1) JBAS015014: Re-attempting failed deployment pbsreport.war
+17:38:08,775 ERROR [org.jboss.msc.service.fail] (MSC service thread 1-6) MSC00001: Failed to start service jboss.remoting.server.remoting-connector: org.jboss.msc.service.StartException in service jboss.remoting.server.remoting-connector: JBAS017112: Address already in use /10.28.20.176:4547
+	at org.jboss.as.remoting.AbstractStreamServerService.start(AbstractStreamServerService.java:109) [jboss-as-remoting-7.1.1.Final.jar:7.1.1.Final]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_10]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_10]
+	at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_10]
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) [rt.jar:1.7.0_10]
+	at sun.nio.ch.Net.bind(Net.java:344) [rt.jar:1.7.0_10]
+	at sun.nio.ch.Net.bind(Net.java:336) [rt.jar:1.7.0_10]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:199) [rt.jar:1.7.0_10]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) [rt.jar:1.7.0_10]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:67) [rt.jar:1.7.0_10]
+	at org.xnio.nio.NioXnioWorker.createTcpServer(NioXnioWorker.java:287)
+	at org.xnio.XnioWorker.createStreamServer(XnioWorker.java:135) [xnio-api-3.0.3.GA.jar:3.0.3.GA]
+	at org.jboss.remoting3.remote.RemoteConnectionProvider$ProviderInterface.createServer(RemoteConnectionProvider.java:209) [jboss-remoting-3.2.3.GA.jar:3.2.3.GA]
+	at org.jboss.as.remoting.AbstractStreamServerService.start(AbstractStreamServerService.java:101) [jboss-as-remoting-7.1.1.Final.jar:7.1.1.Final]
+	... 5 more
+
+17:38:08,805 INFO  [org.jboss.as.server.deployment.scanner] (DeploymentScanner-threads - 1) JBAS015014: Re-attempting failed deployment SPS.war
+17:38:08,776 ERROR [org.jboss.msc.service.fail] (MSC service thread 1-12) MSC00001: Failed to start service jboss.remoting.server.management: org.jboss.msc.service.StartException in service jboss.remoting.server.management: JBAS017112: Address already in use /10.28.26.176:10099
+	at org.jboss.as.remoting.AbstractStreamServerService.start(AbstractStreamServerService.java:109) [jboss-as-remoting-7.1.1.Final.jar:7.1.1.Final]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_10]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_10]
+	at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_10]
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) [rt.jar:1.7.0_10]
+	at sun.nio.ch.Net.bind(Net.java:344) [rt.jar:1.7.0_10]
+	at sun.nio.ch.Net.bind(Net.java:336) [rt.jar:1.7.0_10]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:199) [rt.jar:1.7.0_10]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) [rt.jar:1.7.0_10]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:67) [rt.jar:1.7.0_10]
+	at org.xnio.nio.NioXnioWorker.createTcpServer(NioXnioWorker.java:287)
+	at org.xnio.XnioWorker.createStreamServer(XnioWorker.java:135) [xnio-api-3.0.3.GA.jar:3.0.3.GA]
+	at org.jboss.remoting3.remote.RemoteConnectionProvider$ProviderInterface.createServer(RemoteConnectionProvider.java:209) [jboss-remoting-3.2.3.GA.jar:3.2.3.GA]
+	at org.jboss.as.remoting.AbstractStreamServerService.start(AbstractStreamServerService.java:101) [jboss-as-remoting-7.1.1.Final.jar:7.1.1.Final]
+	... 5 more
+
+17:38:08,812 INFO  [org.jboss.as.server.deployment.scanner] (DeploymentScanner-threads - 1) JBAS015014: Re-attempting failed deployment spsannouncement.war
+17:38:08,814 INFO  [org.jboss.as.server.deployment.scanner] (DeploymentScanner-threads - 1) JBAS015014: Re-attempting failed deployment jackson-core-lgpl-1.8.1.jar
+17:38:08,809 ERROR [org.jboss.msc.service.fail] (MSC service thread 1-4) MSC00001: Failed to start service jboss.serverManagement.controller.management.http: org.jboss.msc.service.StartException in service jboss.serverManagement.controller.management.http: Address already in use /10.28.26.176:10090
+	at org.jboss.as.server.mgmt.HttpManagementService.start(HttpManagementService.java:210) [jboss-as-server-7.1.1.Final.jar:7.1.1.Final]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_10]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_10]
+	at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_10]
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) [rt.jar:1.7.0_10]
+	at sun.nio.ch.Net.bind(Net.java:344) [rt.jar:1.7.0_10]
+	at sun.nio.ch.Net.bind(Net.java:336) [rt.jar:1.7.0_10]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:199) [rt.jar:1.7.0_10]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) [rt.jar:1.7.0_10]
+	at org.jboss.sun.net.httpserver.ServerImpl.<init>(ServerImpl.java:144)
+	at org.jboss.sun.net.httpserver.HttpServerImpl.<init>(HttpServerImpl.java:54)
+	at org.jboss.sun.net.httpserver.DefaultHttpServerProvider.createHttpServer(DefaultHttpServerProvider.java:38)
+	at org.jboss.com.sun.net.httpserver.HttpServer.create(HttpServer.java:147)
+	at org.jboss.as.domain.http.server.ManagementHttpServer.create(ManagementHttpServer.java:145)
+	at org.jboss.as.server.mgmt.HttpManagementService.start(HttpManagementService.java:177) [jboss-as-server-7.1.1.Final.jar:7.1.1.Final]
+	... 5 more
+
+17:38:08,824 INFO  [org.jboss.as.server.deployment.scanner] (DeploymentScanner-threads - 1) JBAS015014: Re-attempting failed deployment pbs.war
+17:38:08,826 INFO  [org.jboss.as.server.deployment.scanner] (DeploymentScanner-threads - 1) JBAS015014: Re-attempting failed deployment jackson-mapper-lgpl-1.8.1.jar
+17:38:09,251 INFO  [org.jboss.as.controller] (Controller Boot Thread) JBAS014774: Service status report
+JBAS014777:   Services which failed to start:      service jboss.remoting.server.management: org.jboss.msc.service.StartException in service jboss.remoting.server.management: JBAS017112: Address already in use /10.28.26.176:10099
+      service jboss.web.connector.http: org.jboss.msc.service.StartException in service jboss.web.connector.http: JBAS018007: Error starting web connector
+      service jboss.remoting.server.remoting-connector: org.jboss.msc.service.StartException in service jboss.remoting.server.remoting-connector: JBAS017112: Address already in use /10.28.20.176:4547
+      service jboss.web.connector.ajp: org.jboss.msc.service.StartException in service jboss.web.connector.ajp: JBAS018007: Error starting web connector
+      service jboss.serverManagement.controller.management.http: org.jboss.msc.service.StartException in service jboss.serverManagement.controller.management.http: Address already in use /10.28.26.176:10090
+
+17:38:09,311 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-4) JBAS015876: Starting deployment of "jackson-core-lgpl-1.8.1.jar"
+17:38:09,311 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-14) JBAS015876: Starting deployment of "pbsreport.war"
+17:38:09,311 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-8) JBAS015876: Starting deployment of "spsannouncement.war"
+17:38:09,311 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-13) JBAS015876: Starting deployment of "SPS.war"
+17:38:09,311 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-1) JBAS015876: Starting deployment of "jackson-mapper-lgpl-1.8.1.jar"
+17:38:09,311 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-15) JBAS015876: Starting deployment of "pbs.war"
+17:38:10,310 INFO  [org.jboss.osgi.framework.internal.BundleManager] (MSC service thread 1-5) JBossOSGi Framework Core - 1.1.8.Final
+17:38:10,667 INFO  [org.jboss.osgi.framework.internal.BundleManager] (MSC service thread 1-11) Install bundle: system.bundle:0.0.0
+17:38:10,898 INFO  [org.jboss.osgi.framework.internal.BundleManager] (MSC service thread 1-1) Install bundle: javax.transaction.api:0.0.0
+17:38:11,094 INFO  [org.jboss.osgi.framework.internal.BundleManager] (MSC service thread 1-8) Install bundle: jboss-osgi-logging:1.0.0
+17:38:11,193 INFO  [org.jboss.osgi.framework.internal.BundleManager] (MSC service thread 1-16) Install bundle: jboss-as-osgi-configadmin:7.1.1.Final
+17:38:11,196 INFO  [org.jboss.osgi.framework.internal.BundleManager] (MSC service thread 1-11) Install bundle: org.apache.felix.log:1.0.0
+17:38:11,214 INFO  [org.jboss.osgi.framework.internal.BundleManager] (MSC service thread 1-14) Install bundle: jbosgi-http-api:1.0.5
+17:38:11,387 INFO  [org.jboss.osgi.framework.internal.BundleManager] (MSC service thread 1-5) Install bundle: org.apache.felix.configadmin:1.2.8
+17:38:12,420 INFO  [org.jboss.osgi.framework.internal.BundleManager] (MSC service thread 1-4) Install bundle: osgi.enterprise:4.2.0.201003190513
+17:38:13,630 INFO  [org.jboss.osgi.framework.internal.StartLevelPlugin] (MSC service thread 1-2) Starting bundles for start level: 1
+17:38:13,633 INFO  [org.jboss.osgi.framework.internal.HostBundleState] (MSC service thread 1-2) Bundle started: jbosgi-http-api:1.0.5
+17:38:13,634 INFO  [org.jboss.osgi.framework.internal.HostBundleState] (MSC service thread 1-2) Bundle started: osgi.enterprise:4.2.0.201003190513
+17:38:13,700 INFO  [org.jboss.osgi.framework.internal.HostBundleState] (MSC service thread 1-2) Bundle started: jboss-as-osgi-configadmin:7.1.1.Final
+17:38:13,739 INFO  [org.jboss.osgi.framework.internal.HostBundleState] (MSC service thread 1-2) Bundle started: jboss-osgi-logging:1.0.0
+17:38:13,790 INFO  [org.jboss.osgi.framework.internal.HostBundleState] (MSC service thread 1-2) Bundle started: org.apache.felix.log:1.0.0
+17:38:13,795 INFO  [org.jboss.osgi.framework.internal.HostBundleState] (MSC service thread 1-2) Bundle started: javax.transaction.api:0.0.0
+17:38:13,863 INFO  [org.jboss.osgi.framework.internal.HostBundleState] (MSC service thread 1-2) Bundle started: org.apache.felix.configadmin:1.2.8
+17:38:13,877 INFO  [org.jboss.osgi.framework.internal.FrameworkActive] (MSC service thread 1-2) OSGi Framework started
+17:38:13,911 INFO  [org.jboss.osgi.framework.internal.BundleManager] (MSC service thread 1-1) Install bundle: jackson-core-lgpl:1.8.1
+17:38:13,916 INFO  [org.jboss.osgi.framework.internal.BundleManager] (MSC service thread 1-8) Install bundle: jackson-mapper-lgpl:1.8.1
+17:38:13,962 INFO  [org.jboss.osgi.framework.internal.HostBundleState] (MSC service thread 1-9) Bundle started: jackson-mapper-lgpl:1.8.1
+17:38:13,965 INFO  [org.jboss.osgi.framework.internal.HostBundleState] (MSC service thread 1-9) Bundle started: jackson-core-lgpl:1.8.1
+17:38:14,672 WARN  [org.jboss.jaxrs] (MSC service thread 1-9) JBAS011204: resteasy.scan found and ignored in web.xml. This is not necessary, as Resteasy will use the container integration in the JAX-RS 1.1 specification in section 2.3.2
+17:38:14,927 INFO  [com.sps.filter.LoginFilter] (MSC service thread 1-12) init method...$$$$$
+17:38:14,927 INFO  [com.sps.filter.LoginFilter] (MSC service thread 1-12) serverNodeName: sn1movx2m0042
+17:38:14,955 INFO  [org.jboss.web] (MSC service thread 1-12) JBAS018210: Registering web context: /spsannouncement
+17:38:15,050 WARN  [org.jboss.as.ee] (MSC service thread 1-3) JBAS011006: Not installing optional component org.springframework.web.context.request.async.StandardServletAsyncWebRequest due to exception: org.jboss.as.server.deployment.DeploymentUnitProcessingException: JBAS011054: Could not find default constructor for class org.springframework.web.context.request.async.StandardServletAsyncWebRequest
+	at org.jboss.as.ee.component.ComponentDescription$DefaultComponentConfigurator.configure(ComponentDescription.java:606)
+	at org.jboss.as.ee.component.deployers.EEModuleConfigurationProcessor.deploy(EEModuleConfigurationProcessor.java:81)
+	at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:113) [jboss-as-server-7.1.1.Final.jar:7.1.1.Final]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_10]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_10]
+	at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_10]
+
+17:38:15,059 WARN  [org.jboss.as.ee] (MSC service thread 1-3) JBAS011006: Not installing optional component org.springframework.http.server.ServletServerHttpAsyncRequestControl due to exception: org.jboss.as.server.deployment.DeploymentUnitProcessingException: JBAS011054: Could not find default constructor for class org.springframework.http.server.ServletServerHttpAsyncRequestControl
+	at org.jboss.as.ee.component.ComponentDescription$DefaultComponentConfigurator.configure(ComponentDescription.java:606)
+	at org.jboss.as.ee.component.deployers.EEModuleConfigurationProcessor.deploy(EEModuleConfigurationProcessor.java:81)
+	at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:113) [jboss-as-server-7.1.1.Final.jar:7.1.1.Final]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_10]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_10]
+	at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_10]
+
+17:38:15,109 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) JBAS010404: Deploying non-JDBC-compliant driver class com.mysql.jdbc.Driver (version 5.1)
+17:38:15,149 INFO  [org.apache.catalina.core.ContainerBase.[jboss.web].[default-host].[/pbs]] (MSC service thread 1-14) No Spring WebApplicationInitializer types detected on classpath
+17:38:15,174 INFO  [org.apache.catalina.core.ContainerBase.[jboss.web].[default-host].[/pbs]] (MSC service thread 1-14) Initializing Spring root WebApplicationContext
+17:38:15,176 INFO  [org.springframework.web.context.ContextLoader] (MSC service thread 1-14) Root WebApplicationContext: initialization started
+17:38:15,277 INFO  [org.springframework.web.context.support.XmlWebApplicationContext] (MSC service thread 1-14) Refreshing Root WebApplicationContext: startup date [Sun Feb 16 17:38:15 MYT 2014]; root of context hierarchy
+17:38:15,322 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (MSC service thread 1-14) Loading XML bean definitions from ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+17:38:15,662 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (MSC service thread 1-14) Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext-services.xml]
+17:38:15,922 INFO  [org.springframework.beans.factory.support.DefaultListableBeanFactory] (MSC service thread 1-14) Overriding bean definition for bean 'mvcUriComponentsContributor': replacing [Root bean: class [org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser$CompositeUriComponentsContributorFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null] with [Root bean: class [org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser$CompositeUriComponentsContributorFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null]
+17:38:16,140 INFO  [org.springframework.context.support.PropertySourcesPlaceholderConfigurer] (MSC service thread 1-14) Loading properties file from class path resource [messages-resources.properties]
+17:38:16,154 INFO  [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] (MSC service thread 1-14) JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+17:38:16,346 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loginHome.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.viewLogin(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:16,347 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/pbsLogin.do],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.PBSLoginUser(com.moe.sps.pbs.model.User,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+17:38:16,354 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessUniform.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessUniform.assessUniform(com.moe.sps.pbs.model.Uniform,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:16,357 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadAcaLevelForUniform],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaLevel> com.moe.sps.pbs.controller.AssessUniform.loadAcaLevelForUniform(javax.servlet.http.HttpServletRequest)
+17:38:16,360 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadClassForUniform],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaClass> com.moe.sps.pbs.controller.AssessUniform.loadClassForUniform(javax.servlet.http.HttpServletRequest)
+17:38:16,363 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForClass],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessUniform.getStudentsForClass(javax.servlet.http.HttpServletRequest)
+17:38:16,365 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessUniformForStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessUniform.assessUniformForStudent(com.moe.sps.pbs.model.Uniform,org.springframework.ui.Model,javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest)
+17:38:16,373 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessByDescriptor.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByDescriptor.assessByDescriptor(com.moe.sps.pbs.model.AssessDescriptor,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:16,376 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadBand],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Band> com.moe.sps.pbs.controller.AssessByDescriptor.loadBand(javax.servlet.http.HttpServletRequest)
+17:38:16,378 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadDescriptor],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Descriptor> com.moe.sps.pbs.controller.AssessByDescriptor.loadDescriptor(javax.servlet.http.HttpServletRequest)
+17:38:16,380 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentListForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessByDescriptor.getStudentListForSubject(javax.servlet.http.HttpServletRequest)
+17:38:16,382 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentListForSubjectDT],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public com.moe.sps.pbs.model.PaginationObject com.moe.sps.pbs.controller.AssessByDescriptor.getStudentListForSubjectDT(javax.servlet.http.HttpServletRequest,int,int,int)
+17:38:16,384 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/updateAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByDescriptor.updateAssessment(javax.servlet.http.HttpServletRequest)
+17:38:16,387 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessmentOfSportsAndGames.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessmentOfSportsAndGames.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:16,388 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForSportsAndGames],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public com.moe.sps.pbs.model.PaginationObject com.moe.sps.pbs.controller.AssessmentOfSportsAndGames.getStudentsForSportsAndGames(javax.servlet.http.HttpServletRequest,int,int,int)
+17:38:16,397 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessByStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:16,399 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadAcaLevel],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaLevel> com.moe.sps.pbs.controller.AssessByStudent.loadAcaLevel(javax.servlet.http.HttpServletRequest)
+17:38:16,400 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/reportByStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.reportByStudent(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:16,402 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadSubjects],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaSubject> com.moe.sps.pbs.controller.AssessByStudent.loadSubjects(javax.servlet.http.HttpServletRequest)
+17:38:16,404 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadByAcaClass],methods=[GET],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaSubject> com.moe.sps.pbs.controller.AssessByStudent.loadByAcaSubject(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpSession)
+17:38:16,406 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadByAcaLevel],methods=[GET],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaClass> com.moe.sps.pbs.controller.AssessByStudent.loadbyAcaLevel(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpSession)
+17:38:16,408 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessByStudent.getStudentsForSubject(javax.servlet.http.HttpServletRequest)
+17:38:16,410 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/saveAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.saveAssessment(javax.servlet.http.HttpServletRequest)
+17:38:16,411 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<java.lang.String> com.moe.sps.pbs.controller.AssessByStudent.loadAssessment(javax.servlet.http.HttpServletRequest)
+17:38:16,413 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadCumulativeAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<java.lang.String> com.moe.sps.pbs.controller.AssessByStudent.loadCumulativeAssessment(javax.servlet.http.HttpServletRequest)
+17:38:16,415 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForSubjectDT],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public com.moe.sps.pbs.model.PaginationObject com.moe.sps.pbs.controller.AssessByStudent.getStudentsForSubjectDT(javax.servlet.http.HttpServletRequest,int,int,int)
+17:38:16,417 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadBandDescriptorForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Band> com.moe.sps.pbs.controller.AssessByStudent.loadBandDescriptorForSubject(javax.servlet.http.HttpServletRequest)
+17:38:16,419 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadClass],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaClass> com.moe.sps.pbs.controller.AssessByStudent.loadClass(javax.servlet.http.HttpServletRequest)
+17:38:16,421 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/schoolProfile.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.SchoolProfile.viewSchoolProfile(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:16,444 INFO  [org.hibernate.validator.util.Version] (MSC service thread 1-14) Hibernate Validator 4.2.0.Final
+17:38:17,298 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/login] onto handler 'login'
+17:38:17,299 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/login/*] onto handler 'login'
+17:38:17,299 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessuniform] onto handler 'assessUniform'
+17:38:17,300 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessuniform/*] onto handler 'assessUniform'
+17:38:17,301 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessbydescriptor] onto handler 'assessByDescriptor'
+17:38:17,302 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessbydescriptor/*] onto handler 'assessByDescriptor'
+17:38:17,302 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessmentofsportsandgames] onto handler 'assessmentOfSportsAndGames'
+17:38:17,303 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessmentofsportsandgames/*] onto handler 'assessmentOfSportsAndGames'
+17:38:17,304 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessbystudent] onto handler 'assessByStudent'
+17:38:17,304 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessbystudent/*] onto handler 'assessByStudent'
+17:38:17,305 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/schoolprofile] onto handler 'schoolProfile'
+17:38:17,306 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/schoolprofile/*] onto handler 'schoolProfile'
+17:38:17,332 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loginHome.do] onto handler 'login'
+17:38:17,333 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/pbsLogin.do] onto handler 'login'
+17:38:17,334 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessUniform.do] onto handler 'assessUniform'
+17:38:17,335 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevelForUniform] onto handler 'assessUniform'
+17:38:17,336 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevelForUniform.*] onto handler 'assessUniform'
+17:38:17,336 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevelForUniform/] onto handler 'assessUniform'
+17:38:17,337 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClassForUniform] onto handler 'assessUniform'
+17:38:17,338 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClassForUniform.*] onto handler 'assessUniform'
+17:38:17,339 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClassForUniform/] onto handler 'assessUniform'
+17:38:17,339 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForClass] onto handler 'assessUniform'
+17:38:17,340 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForClass.*] onto handler 'assessUniform'
+17:38:17,341 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForClass/] onto handler 'assessUniform'
+17:38:17,341 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessUniformForStudent.do] onto handler 'assessUniform'
+17:38:17,343 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessByDescriptor.do] onto handler 'assessByDescriptor'
+17:38:17,344 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBand] onto handler 'assessByDescriptor'
+17:38:17,344 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBand.*] onto handler 'assessByDescriptor'
+17:38:17,345 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBand/] onto handler 'assessByDescriptor'
+17:38:17,346 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadDescriptor] onto handler 'assessByDescriptor'
+17:38:17,346 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadDescriptor.*] onto handler 'assessByDescriptor'
+17:38:17,347 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadDescriptor/] onto handler 'assessByDescriptor'
+17:38:17,348 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubject] onto handler 'assessByDescriptor'
+17:38:17,348 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubject.*] onto handler 'assessByDescriptor'
+17:38:17,349 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubject/] onto handler 'assessByDescriptor'
+17:38:17,350 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubjectDT] onto handler 'assessByDescriptor'
+17:38:17,350 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubjectDT.*] onto handler 'assessByDescriptor'
+17:38:17,351 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubjectDT/] onto handler 'assessByDescriptor'
+17:38:17,352 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/updateAssessment] onto handler 'assessByDescriptor'
+17:38:17,353 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/updateAssessment.*] onto handler 'assessByDescriptor'
+17:38:17,353 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/updateAssessment/] onto handler 'assessByDescriptor'
+17:38:17,354 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessmentOfSportsAndGames.do] onto handler 'assessmentOfSportsAndGames'
+17:38:17,355 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSportsAndGames] onto handler 'assessmentOfSportsAndGames'
+17:38:17,356 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSportsAndGames.*] onto handler 'assessmentOfSportsAndGames'
+17:38:17,356 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSportsAndGames/] onto handler 'assessmentOfSportsAndGames'
+17:38:17,359 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessByStudent.do] onto handler 'assessByStudent'
+17:38:17,359 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevel] onto handler 'assessByStudent'
+17:38:17,360 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevel.*] onto handler 'assessByStudent'
+17:38:17,361 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevel/] onto handler 'assessByStudent'
+17:38:17,361 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/reportByStudent.do] onto handler 'assessByStudent'
+17:38:17,362 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadSubjects] onto handler 'assessByStudent'
+17:38:17,363 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadSubjects.*] onto handler 'assessByStudent'
+17:38:17,363 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadSubjects/] onto handler 'assessByStudent'
+17:38:17,364 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaClass] onto handler 'assessByStudent'
+17:38:17,365 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaClass.*] onto handler 'assessByStudent'
+17:38:17,365 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaClass/] onto handler 'assessByStudent'
+17:38:17,366 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaLevel] onto handler 'assessByStudent'
+17:38:17,367 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaLevel.*] onto handler 'assessByStudent'
+17:38:17,367 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaLevel/] onto handler 'assessByStudent'
+17:38:17,368 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubject] onto handler 'assessByStudent'
+17:38:17,369 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubject.*] onto handler 'assessByStudent'
+17:38:17,370 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubject/] onto handler 'assessByStudent'
+17:38:17,370 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/saveAssessment] onto handler 'assessByStudent'
+17:38:17,371 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/saveAssessment.*] onto handler 'assessByStudent'
+17:38:17,372 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/saveAssessment/] onto handler 'assessByStudent'
+17:38:17,372 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAssessment] onto handler 'assessByStudent'
+17:38:17,373 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAssessment.*] onto handler 'assessByStudent'
+17:38:17,375 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAssessment/] onto handler 'assessByStudent'
+17:38:17,376 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadCumulativeAssessment] onto handler 'assessByStudent'
+17:38:17,376 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadCumulativeAssessment.*] onto handler 'assessByStudent'
+17:38:17,377 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadCumulativeAssessment/] onto handler 'assessByStudent'
+17:38:17,378 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubjectDT] onto handler 'assessByStudent'
+17:38:17,379 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubjectDT.*] onto handler 'assessByStudent'
+17:38:17,380 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubjectDT/] onto handler 'assessByStudent'
+17:38:17,381 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBandDescriptorForSubject] onto handler 'assessByStudent'
+17:38:17,384 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBandDescriptorForSubject.*] onto handler 'assessByStudent'
+17:38:17,385 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBandDescriptorForSubject/] onto handler 'assessByStudent'
+17:38:17,385 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClass] onto handler 'assessByStudent'
+17:38:17,386 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClass.*] onto handler 'assessByStudent'
+17:38:17,386 WARN  [org.jboss.as.ee] (MSC service thread 1-8) JBAS011006: Not installing optional component org.springframework.web.context.request.async.StandardServletAsyncWebRequest due to exception: org.jboss.as.server.deployment.DeploymentUnitProcessingException: JBAS011054: Could not find default constructor for class org.springframework.web.context.request.async.StandardServletAsyncWebRequest
+	at org.jboss.as.ee.component.ComponentDescription$DefaultComponentConfigurator.configure(ComponentDescription.java:606)
+	at org.jboss.as.ee.component.deployers.EEModuleConfigurationProcessor.deploy(EEModuleConfigurationProcessor.java:81)
+	at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:113) [jboss-as-server-7.1.1.Final.jar:7.1.1.Final]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_10]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_10]
+	at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_10]
+
+17:38:17,387 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClass/] onto handler 'assessByStudent'
+17:38:17,392 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/schoolProfile.do] onto handler 'schoolProfile'
+17:38:17,392 WARN  [org.jboss.as.ee] (MSC service thread 1-8) JBAS011006: Not installing optional component org.springframework.http.server.ServletServerHttpAsyncRequestControl due to exception: org.jboss.as.server.deployment.DeploymentUnitProcessingException: JBAS011054: Could not find default constructor for class org.springframework.http.server.ServletServerHttpAsyncRequestControl
+	at org.jboss.as.ee.component.ComponentDescription$DefaultComponentConfigurator.configure(ComponentDescription.java:606)
+	at org.jboss.as.ee.component.deployers.EEModuleConfigurationProcessor.deploy(EEModuleConfigurationProcessor.java:81)
+	at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:113) [jboss-as-server-7.1.1.Final.jar:7.1.1.Final]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_10]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_10]
+	at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_10]
+
+17:38:17,416 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loginHome.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.viewLogin(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,418 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/pbsLogin.do],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.PBSLoginUser(com.moe.sps.pbs.model.User,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+17:38:17,420 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessUniform.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessUniform.assessUniform(com.moe.sps.pbs.model.Uniform,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,421 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadAcaLevelForUniform],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaLevel> com.moe.sps.pbs.controller.AssessUniform.loadAcaLevelForUniform(javax.servlet.http.HttpServletRequest)
+17:38:17,423 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadClassForUniform],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaClass> com.moe.sps.pbs.controller.AssessUniform.loadClassForUniform(javax.servlet.http.HttpServletRequest)
+17:38:17,424 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForClass],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessUniform.getStudentsForClass(javax.servlet.http.HttpServletRequest)
+17:38:17,426 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessUniformForStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessUniform.assessUniformForStudent(com.moe.sps.pbs.model.Uniform,org.springframework.ui.Model,javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest)
+17:38:17,429 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessByDescriptor.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByDescriptor.assessByDescriptor(com.moe.sps.pbs.model.AssessDescriptor,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,434 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadBand],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Band> com.moe.sps.pbs.controller.AssessByDescriptor.loadBand(javax.servlet.http.HttpServletRequest)
+17:38:17,435 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadDescriptor],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Descriptor> com.moe.sps.pbs.controller.AssessByDescriptor.loadDescriptor(javax.servlet.http.HttpServletRequest)
+17:38:17,438 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentListForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessByDescriptor.getStudentListForSubject(javax.servlet.http.HttpServletRequest)
+17:38:17,439 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentListForSubjectDT],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public com.moe.sps.pbs.model.PaginationObject com.moe.sps.pbs.controller.AssessByDescriptor.getStudentListForSubjectDT(javax.servlet.http.HttpServletRequest,int,int,int)
+17:38:17,440 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-8) JBAS010404: Deploying non-JDBC-compliant driver class com.mysql.jdbc.Driver (version 5.1)
+17:38:17,441 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/updateAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByDescriptor.updateAssessment(javax.servlet.http.HttpServletRequest)
+17:38:17,443 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessmentOfSportsAndGames.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessmentOfSportsAndGames.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,445 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForSportsAndGames],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public com.moe.sps.pbs.model.PaginationObject com.moe.sps.pbs.controller.AssessmentOfSportsAndGames.getStudentsForSportsAndGames(javax.servlet.http.HttpServletRequest,int,int,int)
+17:38:17,451 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessByStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,452 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadAcaLevel],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaLevel> com.moe.sps.pbs.controller.AssessByStudent.loadAcaLevel(javax.servlet.http.HttpServletRequest)
+17:38:17,453 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/reportByStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.reportByStudent(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,455 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadSubjects],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaSubject> com.moe.sps.pbs.controller.AssessByStudent.loadSubjects(javax.servlet.http.HttpServletRequest)
+17:38:17,459 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadByAcaClass],methods=[GET],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaSubject> com.moe.sps.pbs.controller.AssessByStudent.loadByAcaSubject(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpSession)
+17:38:17,460 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadByAcaLevel],methods=[GET],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaClass> com.moe.sps.pbs.controller.AssessByStudent.loadbyAcaLevel(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpSession)
+17:38:17,462 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessByStudent.getStudentsForSubject(javax.servlet.http.HttpServletRequest)
+17:38:17,463 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/saveAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.saveAssessment(javax.servlet.http.HttpServletRequest)
+17:38:17,464 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<java.lang.String> com.moe.sps.pbs.controller.AssessByStudent.loadAssessment(javax.servlet.http.HttpServletRequest)
+17:38:17,465 INFO  [org.apache.catalina.core.ContainerBase.[jboss.web].[default-host].[/pbsreport]] (MSC service thread 1-9) No Spring WebApplicationInitializer types detected on classpath
+17:38:17,466 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadCumulativeAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<java.lang.String> com.moe.sps.pbs.controller.AssessByStudent.loadCumulativeAssessment(javax.servlet.http.HttpServletRequest)
+17:38:17,468 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForSubjectDT],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public com.moe.sps.pbs.model.PaginationObject com.moe.sps.pbs.controller.AssessByStudent.getStudentsForSubjectDT(javax.servlet.http.HttpServletRequest,int,int,int)
+17:38:17,469 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadBandDescriptorForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Band> com.moe.sps.pbs.controller.AssessByStudent.loadBandDescriptorForSubject(javax.servlet.http.HttpServletRequest)
+17:38:17,471 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadClass],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaClass> com.moe.sps.pbs.controller.AssessByStudent.loadClass(javax.servlet.http.HttpServletRequest)
+17:38:17,472 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/schoolProfile.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.SchoolProfile.viewSchoolProfile(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,474 INFO  [org.apache.catalina.core.ContainerBase.[jboss.web].[default-host].[/pbsreport]] (MSC service thread 1-9) Initializing Spring root WebApplicationContext
+17:38:17,475 INFO  [org.springframework.web.context.ContextLoader] (MSC service thread 1-9) Root WebApplicationContext: initialization started
+17:38:17,546 INFO  [org.springframework.web.context.support.XmlWebApplicationContext] (MSC service thread 1-9) Refreshing Root WebApplicationContext: startup date [Sun Feb 16 17:38:17 MYT 2014]; root of context hierarchy
+17:38:17,589 INFO  [org.springframework.web.context.ContextLoader] (MSC service thread 1-14) Root WebApplicationContext: initialization completed in 2412 ms
+17:38:17,591 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (MSC service thread 1-9) Loading XML bean definitions from ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+17:38:17,604 INFO  [org.apache.catalina.core.ContainerBase.[jboss.web].[default-host].[/pbs]] (MSC service thread 1-14) Initializing Spring FrameworkServlet 'dispatcher'
+17:38:17,604 INFO  [org.springframework.web.servlet.DispatcherServlet] (MSC service thread 1-14) FrameworkServlet 'dispatcher': initialization started
+17:38:17,612 INFO  [org.springframework.web.context.support.XmlWebApplicationContext] (MSC service thread 1-14) Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Sun Feb 16 17:38:17 MYT 2014]; parent: Root WebApplicationContext
+17:38:17,614 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (MSC service thread 1-14) Loading XML bean definitions from ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+17:38:17,701 INFO  [org.springframework.context.support.PropertySourcesPlaceholderConfigurer] (MSC service thread 1-14) Loading properties file from class path resource [messages-resources.properties]
+17:38:17,707 INFO  [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] (MSC service thread 1-14) JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+17:38:17,727 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loginHome.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.viewLogin(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,728 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/pbsLogin.do],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.PBSLoginUser(com.moe.sps.pbs.model.User,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+17:38:17,731 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessUniform.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessUniform.assessUniform(com.moe.sps.pbs.model.Uniform,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,733 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadAcaLevelForUniform],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaLevel> com.moe.sps.pbs.controller.AssessUniform.loadAcaLevelForUniform(javax.servlet.http.HttpServletRequest)
+17:38:17,734 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadClassForUniform],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaClass> com.moe.sps.pbs.controller.AssessUniform.loadClassForUniform(javax.servlet.http.HttpServletRequest)
+17:38:17,736 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForClass],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessUniform.getStudentsForClass(javax.servlet.http.HttpServletRequest)
+17:38:17,738 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessUniformForStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessUniform.assessUniformForStudent(com.moe.sps.pbs.model.Uniform,org.springframework.ui.Model,javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest)
+17:38:17,741 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessByDescriptor.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByDescriptor.assessByDescriptor(com.moe.sps.pbs.model.AssessDescriptor,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,743 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadBand],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Band> com.moe.sps.pbs.controller.AssessByDescriptor.loadBand(javax.servlet.http.HttpServletRequest)
+17:38:17,744 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadDescriptor],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Descriptor> com.moe.sps.pbs.controller.AssessByDescriptor.loadDescriptor(javax.servlet.http.HttpServletRequest)
+17:38:17,746 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentListForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessByDescriptor.getStudentListForSubject(javax.servlet.http.HttpServletRequest)
+17:38:17,748 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentListForSubjectDT],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public com.moe.sps.pbs.model.PaginationObject com.moe.sps.pbs.controller.AssessByDescriptor.getStudentListForSubjectDT(javax.servlet.http.HttpServletRequest,int,int,int)
+17:38:17,750 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/updateAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByDescriptor.updateAssessment(javax.servlet.http.HttpServletRequest)
+17:38:17,752 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessmentOfSportsAndGames.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessmentOfSportsAndGames.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,753 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForSportsAndGames],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public com.moe.sps.pbs.model.PaginationObject com.moe.sps.pbs.controller.AssessmentOfSportsAndGames.getStudentsForSportsAndGames(javax.servlet.http.HttpServletRequest,int,int,int)
+17:38:17,758 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/assessByStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,759 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadAcaLevel],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaLevel> com.moe.sps.pbs.controller.AssessByStudent.loadAcaLevel(javax.servlet.http.HttpServletRequest)
+17:38:17,761 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/reportByStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.reportByStudent(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,763 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadSubjects],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaSubject> com.moe.sps.pbs.controller.AssessByStudent.loadSubjects(javax.servlet.http.HttpServletRequest)
+17:38:17,764 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadByAcaClass],methods=[GET],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaSubject> com.moe.sps.pbs.controller.AssessByStudent.loadByAcaSubject(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpSession)
+17:38:17,776 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (MSC service thread 1-9) Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext-services.xml]
+17:38:17,778 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadByAcaLevel],methods=[GET],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaClass> com.moe.sps.pbs.controller.AssessByStudent.loadbyAcaLevel(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpSession)
+17:38:17,785 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessByStudent.getStudentsForSubject(javax.servlet.http.HttpServletRequest)
+17:38:17,787 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/saveAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.saveAssessment(javax.servlet.http.HttpServletRequest)
+17:38:17,788 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<java.lang.String> com.moe.sps.pbs.controller.AssessByStudent.loadAssessment(javax.servlet.http.HttpServletRequest)
+17:38:17,790 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadCumulativeAssessment],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<java.lang.String> com.moe.sps.pbs.controller.AssessByStudent.loadCumulativeAssessment(javax.servlet.http.HttpServletRequest)
+17:38:17,791 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/getStudentsForSubjectDT],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public com.moe.sps.pbs.model.PaginationObject com.moe.sps.pbs.controller.AssessByStudent.getStudentsForSubjectDT(javax.servlet.http.HttpServletRequest,int,int,int)
+17:38:17,794 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadBandDescriptorForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Band> com.moe.sps.pbs.controller.AssessByStudent.loadBandDescriptorForSubject(javax.servlet.http.HttpServletRequest)
+17:38:17,795 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/loadClass],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaClass> com.moe.sps.pbs.controller.AssessByStudent.loadClass(javax.servlet.http.HttpServletRequest)
+17:38:17,797 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-14) Mapped "{[/schoolProfile.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.SchoolProfile.viewSchoolProfile(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:17,815 INFO  [org.springframework.beans.factory.support.DefaultListableBeanFactory] (MSC service thread 1-9) Overriding bean definition for bean 'mvcUriComponentsContributor': replacing [Root bean: class [org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser$CompositeUriComponentsContributorFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null] with [Root bean: class [org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser$CompositeUriComponentsContributorFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null]
+17:38:17,894 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/login] onto handler 'login'
+17:38:17,895 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/login/*] onto handler 'login'
+17:38:17,896 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessuniform] onto handler 'assessUniform'
+17:38:17,896 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessuniform/*] onto handler 'assessUniform'
+17:38:17,897 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessbydescriptor] onto handler 'assessByDescriptor'
+17:38:17,898 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessbydescriptor/*] onto handler 'assessByDescriptor'
+17:38:17,899 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessmentofsportsandgames] onto handler 'assessmentOfSportsAndGames'
+17:38:17,899 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessmentofsportsandgames/*] onto handler 'assessmentOfSportsAndGames'
+17:38:17,900 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessbystudent] onto handler 'assessByStudent'
+17:38:17,901 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessbystudent/*] onto handler 'assessByStudent'
+17:38:17,902 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/schoolprofile] onto handler 'schoolProfile'
+17:38:17,903 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-14) Mapped URL path [/schoolprofile/*] onto handler 'schoolProfile'
+17:38:18,139 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loginHome.do] onto handler 'login'
+17:38:18,140 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/pbsLogin.do] onto handler 'login'
+17:38:18,142 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessUniform.do] onto handler 'assessUniform'
+17:38:18,142 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevelForUniform] onto handler 'assessUniform'
+17:38:18,144 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevelForUniform.*] onto handler 'assessUniform'
+17:38:18,152 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevelForUniform/] onto handler 'assessUniform'
+17:38:18,152 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClassForUniform] onto handler 'assessUniform'
+17:38:18,153 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClassForUniform.*] onto handler 'assessUniform'
+17:38:18,154 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClassForUniform/] onto handler 'assessUniform'
+17:38:18,154 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForClass] onto handler 'assessUniform'
+17:38:18,155 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForClass.*] onto handler 'assessUniform'
+17:38:18,156 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForClass/] onto handler 'assessUniform'
+17:38:18,157 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessUniformForStudent.do] onto handler 'assessUniform'
+17:38:18,158 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessByDescriptor.do] onto handler 'assessByDescriptor'
+17:38:18,159 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBand] onto handler 'assessByDescriptor'
+17:38:18,160 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBand.*] onto handler 'assessByDescriptor'
+17:38:18,160 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBand/] onto handler 'assessByDescriptor'
+17:38:18,161 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadDescriptor] onto handler 'assessByDescriptor'
+17:38:18,162 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadDescriptor.*] onto handler 'assessByDescriptor'
+17:38:18,162 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadDescriptor/] onto handler 'assessByDescriptor'
+17:38:18,163 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubject] onto handler 'assessByDescriptor'
+17:38:18,164 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubject.*] onto handler 'assessByDescriptor'
+17:38:18,165 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubject/] onto handler 'assessByDescriptor'
+17:38:18,165 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubjectDT] onto handler 'assessByDescriptor'
+17:38:18,166 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubjectDT.*] onto handler 'assessByDescriptor'
+17:38:18,180 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentListForSubjectDT/] onto handler 'assessByDescriptor'
+17:38:18,181 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/updateAssessment] onto handler 'assessByDescriptor'
+17:38:18,182 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/updateAssessment.*] onto handler 'assessByDescriptor'
+17:38:18,183 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/updateAssessment/] onto handler 'assessByDescriptor'
+17:38:18,184 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessmentOfSportsAndGames.do] onto handler 'assessmentOfSportsAndGames'
+17:38:18,185 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSportsAndGames] onto handler 'assessmentOfSportsAndGames'
+17:38:18,186 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSportsAndGames.*] onto handler 'assessmentOfSportsAndGames'
+17:38:18,191 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSportsAndGames/] onto handler 'assessmentOfSportsAndGames'
+17:38:18,197 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/assessByStudent.do] onto handler 'assessByStudent'
+17:38:18,199 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevel] onto handler 'assessByStudent'
+17:38:18,200 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevel.*] onto handler 'assessByStudent'
+17:38:18,202 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAcaLevel/] onto handler 'assessByStudent'
+17:38:18,204 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/reportByStudent.do] onto handler 'assessByStudent'
+17:38:18,206 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadSubjects] onto handler 'assessByStudent'
+17:38:18,207 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadSubjects.*] onto handler 'assessByStudent'
+17:38:18,209 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadSubjects/] onto handler 'assessByStudent'
+17:38:18,211 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaClass] onto handler 'assessByStudent'
+17:38:18,213 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaClass.*] onto handler 'assessByStudent'
+17:38:18,216 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaClass/] onto handler 'assessByStudent'
+17:38:18,219 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaLevel] onto handler 'assessByStudent'
+17:38:18,221 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaLevel.*] onto handler 'assessByStudent'
+17:38:18,223 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadByAcaLevel/] onto handler 'assessByStudent'
+17:38:18,225 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubject] onto handler 'assessByStudent'
+17:38:18,227 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubject.*] onto handler 'assessByStudent'
+17:38:18,229 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubject/] onto handler 'assessByStudent'
+17:38:18,230 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/saveAssessment] onto handler 'assessByStudent'
+17:38:18,232 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/saveAssessment.*] onto handler 'assessByStudent'
+17:38:18,235 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/saveAssessment/] onto handler 'assessByStudent'
+17:38:18,236 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAssessment] onto handler 'assessByStudent'
+17:38:18,238 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAssessment.*] onto handler 'assessByStudent'
+17:38:18,239 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadAssessment/] onto handler 'assessByStudent'
+17:38:18,243 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadCumulativeAssessment] onto handler 'assessByStudent'
+17:38:18,244 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadCumulativeAssessment.*] onto handler 'assessByStudent'
+17:38:18,248 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadCumulativeAssessment/] onto handler 'assessByStudent'
+17:38:18,250 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubjectDT] onto handler 'assessByStudent'
+17:38:18,251 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubjectDT.*] onto handler 'assessByStudent'
+17:38:18,253 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/getStudentsForSubjectDT/] onto handler 'assessByStudent'
+17:38:18,254 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBandDescriptorForSubject] onto handler 'assessByStudent'
+17:38:18,256 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBandDescriptorForSubject.*] onto handler 'assessByStudent'
+17:38:18,257 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadBandDescriptorForSubject/] onto handler 'assessByStudent'
+17:38:18,259 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClass] onto handler 'assessByStudent'
+17:38:18,261 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClass.*] onto handler 'assessByStudent'
+17:38:18,262 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/loadClass/] onto handler 'assessByStudent'
+17:38:18,265 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-14) Mapped URL path [/schoolProfile.do] onto handler 'schoolProfile'
+17:38:18,270 INFO  [org.springframework.context.support.PropertySourcesPlaceholderConfigurer] (MSC service thread 1-9) Loading properties file from class path resource [messages-resources.properties]
+17:38:18,291 INFO  [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] (MSC service thread 1-9) JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+17:38:18,306 INFO  [org.springframework.web.servlet.DispatcherServlet] (MSC service thread 1-14) FrameworkServlet 'dispatcher': initialization completed in 701 ms
+17:38:18,314 INFO  [org.jboss.web] (MSC service thread 1-14) JBAS018210: Registering web context: /pbs
+17:38:18,499 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/login] onto handler 'login'
+17:38:18,502 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/login/*] onto handler 'login'
+17:38:18,503 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/assessbystudent] onto handler 'assessByStudent'
+17:38:18,505 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/assessbystudent/*] onto handler 'assessByStudent'
+17:38:18,507 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/schoolprofile] onto handler 'schoolProfile'
+17:38:18,508 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/schoolprofile/*] onto handler 'schoolProfile'
+17:38:18,528 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/classstudent] onto handler 'classStudent'
+17:38:18,529 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/classstudent/*] onto handler 'classStudent'
+17:38:18,607 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentcumulative] onto handler 'studentCumulative'
+17:38:18,608 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentcumulative/*] onto handler 'studentCumulative'
+17:38:18,704 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/loginHome.do] onto handler 'login'
+17:38:18,707 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/pbsLogin.do] onto handler 'login'
+17:38:18,713 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/assessByStudent.do] onto handler 'assessByStudent'
+17:38:18,715 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/getStudentsForSubject] onto handler 'assessByStudent'
+17:38:18,716 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/getStudentsForSubject.*] onto handler 'assessByStudent'
+17:38:18,718 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/getStudentsForSubject/] onto handler 'assessByStudent'
+17:38:18,720 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/loadAcaLevel] onto handler 'assessByStudent'
+17:38:18,721 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/loadAcaLevel.*] onto handler 'assessByStudent'
+17:38:18,723 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/loadAcaLevel/] onto handler 'assessByStudent'
+17:38:18,725 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/schoolProfile.do] onto handler 'schoolProfile'
+17:38:18,727 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/classStudent/download/pdf] onto handler 'classStudent'
+17:38:18,729 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/classStudent/download/pdf.*] onto handler 'classStudent'
+17:38:18,731 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/classStudent/download/pdf/] onto handler 'classStudent'
+17:38:18,733 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentCumulative/search.do] onto handler 'studentCumulative'
+17:38:18,735 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentCumulative/download/pdf] onto handler 'studentCumulative'
+17:38:18,736 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentCumulative/download/pdf.*] onto handler 'studentCumulative'
+17:38:18,738 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentCumulative/download/pdf/] onto handler 'studentCumulative'
+17:38:18,815 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/loginHome.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.viewLogin(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:18,819 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/pbsLogin.do],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.PBSLoginUser(com.moe.sps.pbs.model.User,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+17:38:18,824 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/assessByStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:18,828 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/getStudentsForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessByStudent.getStudentsForSubject(javax.servlet.http.HttpServletRequest)
+17:38:18,831 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/loadAcaLevel],methods=[GET],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaLevel> com.moe.sps.pbs.controller.AssessByStudent.loadAcaLevelPost(javax.servlet.http.HttpServletRequest)
+17:38:18,835 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/schoolProfile.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.SchoolProfile.viewSchoolProfile(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:18,839 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/classStudent/download/pdf],methods=[GET],params=[],headers=[],consumes=[],produces=[application/pdf],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.moe.sps.pbs.controller.ClassStudent.doPDF(org.springframework.web.servlet.ModelAndView)
+17:38:18,844 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/studentCumulative/search.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.StudentCumulative.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:18,848 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/studentCumulative/download/pdf],methods=[GET],params=[],headers=[],consumes=[],produces=[application/pdf],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.moe.sps.pbs.controller.StudentCumulative.doPDF(org.springframework.web.servlet.ModelAndView,javax.servlet.http.HttpServletRequest)
+17:38:19,299 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (MSC service thread 1-9) Loading XML bean definitions from ServletContext resource [/WEB-INF/jasper-views.xml]
+17:38:19,317 INFO  [org.springframework.web.context.support.GenericWebApplicationContext] (MSC service thread 1-9) Refreshing org.springframework.web.context.support.GenericWebApplicationContext@42edb11f: startup date [Sun Feb 16 17:38:19 MYT 2014]; parent: Root WebApplicationContext
+17:38:19,337 INFO  [org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView] (MSC service thread 1-9) Compiling Jasper Report loaded from class path resource [reports/ClassStudent.jrxml]
+17:38:21,704 INFO  [org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView] (MSC service thread 1-9) Compiling Jasper Report loaded from class path resource [reports/StudentCumulative.jrxml]
+17:38:21,946 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/loginHome.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.viewLogin(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:21,949 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/pbsLogin.do],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.PBSLoginUser(com.moe.sps.pbs.model.User,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+17:38:21,954 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/assessByStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:21,957 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/getStudentsForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessByStudent.getStudentsForSubject(javax.servlet.http.HttpServletRequest)
+17:38:21,961 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/loadAcaLevel],methods=[GET],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaLevel> com.moe.sps.pbs.controller.AssessByStudent.loadAcaLevelPost(javax.servlet.http.HttpServletRequest)
+17:38:21,964 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/schoolProfile.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.SchoolProfile.viewSchoolProfile(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:21,969 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/classStudent/download/pdf],methods=[GET],params=[],headers=[],consumes=[],produces=[application/pdf],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.moe.sps.pbs.controller.ClassStudent.doPDF(org.springframework.web.servlet.ModelAndView)
+17:38:21,973 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/studentCumulative/search.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.StudentCumulative.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:21,977 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/studentCumulative/download/pdf],methods=[GET],params=[],headers=[],consumes=[],produces=[application/pdf],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.moe.sps.pbs.controller.StudentCumulative.doPDF(org.springframework.web.servlet.ModelAndView,javax.servlet.http.HttpServletRequest)
+17:38:22,096 INFO  [org.springframework.web.context.ContextLoader] (MSC service thread 1-9) Root WebApplicationContext: initialization completed in 4619 ms
+17:38:22,113 INFO  [org.apache.catalina.core.ContainerBase.[jboss.web].[default-host].[/pbsreport]] (MSC service thread 1-9) Initializing Spring FrameworkServlet 'dispatcher'
+17:38:22,114 INFO  [org.springframework.web.servlet.DispatcherServlet] (MSC service thread 1-9) FrameworkServlet 'dispatcher': initialization started
+17:38:22,121 INFO  [org.springframework.web.context.support.XmlWebApplicationContext] (MSC service thread 1-9) Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Sun Feb 16 17:38:22 MYT 2014]; parent: Root WebApplicationContext
+17:38:22,126 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (MSC service thread 1-9) Loading XML bean definitions from ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+17:38:22,350 INFO  [org.springframework.context.support.PropertySourcesPlaceholderConfigurer] (MSC service thread 1-9) Loading properties file from class path resource [messages-resources.properties]
+17:38:22,355 INFO  [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] (MSC service thread 1-9) JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+17:38:22,386 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/login] onto handler 'login'
+17:38:22,387 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/login/*] onto handler 'login'
+17:38:22,388 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/assessbystudent] onto handler 'assessByStudent'
+17:38:22,388 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/assessbystudent/*] onto handler 'assessByStudent'
+17:38:22,389 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/schoolprofile] onto handler 'schoolProfile'
+17:38:22,389 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/schoolprofile/*] onto handler 'schoolProfile'
+17:38:22,392 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/classstudent] onto handler 'classStudent'
+17:38:22,392 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/classstudent/*] onto handler 'classStudent'
+17:38:22,430 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentcumulative] onto handler 'studentCumulative'
+17:38:22,431 INFO  [org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentcumulative/*] onto handler 'studentCumulative'
+17:38:22,442 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/loginHome.do] onto handler 'login'
+17:38:22,442 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/pbsLogin.do] onto handler 'login'
+17:38:22,443 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/assessByStudent.do] onto handler 'assessByStudent'
+17:38:22,444 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/getStudentsForSubject] onto handler 'assessByStudent'
+17:38:22,444 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/getStudentsForSubject.*] onto handler 'assessByStudent'
+17:38:22,445 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/getStudentsForSubject/] onto handler 'assessByStudent'
+17:38:22,446 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/loadAcaLevel] onto handler 'assessByStudent'
+17:38:22,446 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/loadAcaLevel.*] onto handler 'assessByStudent'
+17:38:22,447 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/loadAcaLevel/] onto handler 'assessByStudent'
+17:38:22,448 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/schoolProfile.do] onto handler 'schoolProfile'
+17:38:22,449 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/classStudent/download/pdf] onto handler 'classStudent'
+17:38:22,449 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/classStudent/download/pdf.*] onto handler 'classStudent'
+17:38:22,450 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/classStudent/download/pdf/] onto handler 'classStudent'
+17:38:22,451 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentCumulative/search.do] onto handler 'studentCumulative'
+17:38:22,451 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentCumulative/download/pdf] onto handler 'studentCumulative'
+17:38:22,452 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentCumulative/download/pdf.*] onto handler 'studentCumulative'
+17:38:22,452 INFO  [org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping] (MSC service thread 1-9) Mapped URL path [/studentCumulative/download/pdf/] onto handler 'studentCumulative'
+17:38:22,460 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/loginHome.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.viewLogin(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:22,461 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/pbsLogin.do],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.Login.PBSLoginUser(com.moe.sps.pbs.model.User,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+17:38:22,463 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/assessByStudent.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.AssessByStudent.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:22,465 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/getStudentsForSubject],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.Student> com.moe.sps.pbs.controller.AssessByStudent.getStudentsForSubject(javax.servlet.http.HttpServletRequest)
+17:38:22,466 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/loadAcaLevel],methods=[GET],params=[],headers=[],consumes=[],produces=[application/json],custom=[]}" onto public java.util.List<com.moe.sps.pbs.model.AcaLevel> com.moe.sps.pbs.controller.AssessByStudent.loadAcaLevelPost(javax.servlet.http.HttpServletRequest)
+17:38:22,467 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/schoolProfile.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.SchoolProfile.viewSchoolProfile(org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:22,469 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/classStudent/download/pdf],methods=[GET],params=[],headers=[],consumes=[],produces=[application/pdf],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.moe.sps.pbs.controller.ClassStudent.doPDF(org.springframework.web.servlet.ModelAndView)
+17:38:22,471 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/studentCumulative/search.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.moe.sps.pbs.controller.StudentCumulative.viewSchoolProfile(com.moe.sps.pbs.model.AssessStudent,org.springframework.ui.Model,javax.servlet.http.HttpSession)
+17:38:22,472 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] (MSC service thread 1-9) Mapped "{[/studentCumulative/download/pdf],methods=[GET],params=[],headers=[],consumes=[],produces=[application/pdf],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.moe.sps.pbs.controller.StudentCumulative.doPDF(org.springframework.web.servlet.ModelAndView,javax.servlet.http.HttpServletRequest)
+17:38:22,548 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (MSC service thread 1-9) Loading XML bean definitions from ServletContext resource [/WEB-INF/jasper-views.xml]
+17:38:22,560 INFO  [org.springframework.web.context.support.GenericWebApplicationContext] (MSC service thread 1-9) Refreshing org.springframework.web.context.support.GenericWebApplicationContext@63fa2863: startup date [Sun Feb 16 17:38:22 MYT 2014]; parent: WebApplicationContext for namespace 'dispatcher-servlet'
+17:38:22,562 INFO  [org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView] (MSC service thread 1-9) Compiling Jasper Report loaded from class path resource [reports/ClassStudent.jrxml]
+17:38:22,741 INFO  [org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView] (MSC service thread 1-9) Compiling Jasper Report loaded from class path resource [reports/StudentCumulative.jrxml]
+17:38:22,894 INFO  [org.springframework.web.servlet.DispatcherServlet] (MSC service thread 1-9) FrameworkServlet 'dispatcher': initialization completed in 778 ms
+17:38:22,898 INFO  [org.jboss.web] (MSC service thread 1-9) JBAS018210: Registering web context: /pbsreport

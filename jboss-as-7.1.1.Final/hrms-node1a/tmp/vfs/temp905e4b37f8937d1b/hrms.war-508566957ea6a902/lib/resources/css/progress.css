@@ -1,0 +1,53 @@
+/*
+ * Copyright (C) 2012  Krawler Information Systems Pvt Ltd
+ * All rights reserved.
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+.x-progress-wrap {
+    border:1px solid #6593cf;
+    overflow:hidden;
+}
+.x-progress-inner {
+    height:18px;
+    background: #e0e8f3 url(../images/default/qtip/bg.gif) repeat-x;
+    position:relative;
+}
+.x-progress-bar {
+    height:18px;
+    float:left;
+    width:0;
+    background:#9CBFEE url( ../images/default/progress/progress-bg.gif ) repeat-x left center;
+    border-top:1px solid #D1E4FD;
+    border-bottom:1px solid #7FA9E4;
+    border-right:1px solid #7FA9E4;
+}
+.x-progress-text {
+    font-size:11px;
+    font-weight:bold;
+    color:#fff;
+    padding:1px 5px;
+    overflow:hidden;
+    position:absolute;
+    left:0;
+    text-align:center;
+}
+.x-progress-text-back {
+    color:#396095;
+    line-height:16px;
+}
+.wtf-ie .x-progress-text-back {
+    line-height:15px;
+}

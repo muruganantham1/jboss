@@ -1,0 +1,30 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f3105fb942b, pid=18852, tid=139848568854272
+#
+# JRE version: 7.0_10-b18
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (23.6-b04 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# C  [libjprofilerti.so+0x8b42b]  jclasslib::ByteCodeReader::readByteCode(char*, int, jclasslib::AbstractInstruction**, int)+0x5b
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f3100091000):  JavaThread "main" [_thread_in_native, id=18853, stack(0x00007f310834d000,0x00007f310844e000)]
+
+siginfo:si_signo=SIGSEGV: si_errno=0, si_code=1 (SEGV_MAPERR), si_addr=0x0000000000000041
+
+Registers:
+RAX=0x00007f31001eaed0, RBX=0x00007f31004c17d0, RCX=0x00007f31004c17d0, RDX=0x00007f3100118c30
+RSP=0x00007f3108447180, RBP=0x00007f3108447208, RSI=0x0000000000000041, RDI=0x00007f3106223b90
+R8 =0x00007f31001eaef0, R9 =0x00007f3100139e48, R10=0x0000000000000110, R11=0x00007f31079d0720
+R12=0x0000000000000000, R13=0x00007f3108447190, R14=0x0000000000000001, R15=0x000000000000002e
+RIP=0x00007f3105fb942b, EFLAGS=0x0000000000010206, CSGSFS=0x0000000000000033, ERR=0x0000000000000006

@@ -1,0 +1,89 @@
+/*
+ * Copyright (C) 2012  Krawler Information Systems Pvt Ltd
+ * All rights reserved.
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+::-moz-selection 
+{background-color:#CCC;color:#888;}
+::selection
+{background-color:#CCC;color:#888;}
+
+body 
+{font-family: 'Monda', tahoma, arial, sans-serif;background-color: #FFF;margin: 0;}
+a,a:link,a:focus,a:active,a:visited
+{color:#06C;text-decoration:none;}
+a:hover
+{color:#06C;}
+h1,h2,h3,h4,h5,h6
+{color:#06C;font-weight:normal;margin:0px;padding:0px;}
+img
+{border:none;}
+
+.errCls 
+{color:#F03;font-size: .7em !important; display:block; text-align:center;}
+.infoCls 
+{color: #06F;font-size: .7em !important; display:block; text-align:center;}
+
+.content 
+{width:250px;text-align: left; margin:0px auto;padding: 30px;border: 1px solid #AAA;background-color: white;-moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;border-radius:5px;}
+#bookmarkheader
+{width: 100%;position: absolute;left: 0%;top: 15%;color: black;}
+.login 
+{margin: auto;text-align: left;}
+.prompt 
+{text-align: left;}
+#wrapper 
+{margin: 0;padding: 0;text-align: center;}
+#content 
+{width: 100%;position: absolute;left: 0%;top: 15%;color: black;}
+.labels 
+{display: block;width: 100px;text-transform:uppercase;color:#999;font-size:0.7em;}
+.inputbox,input,select,textarea,button
+{font-family: 'Monda', tahoma, arial, sans-serif;width:240px;display:block;background:none;background:#FFF;border:none; border-collapse:none;-moz-border-radius:3px;-webkit-border-radius:3px;-khtml-border-radius:3px;border-radius:3px;border:#AAA 1px solid; margin:5px; margin-left:0px;  padding:5px;}
+input:hover,select:hover,textarea:hover,button:hover
+{border:1px solid #06C;}
+.errorprompt 
+{font-weight: bold;color:#F03;visibility: hidden;}
+#LoginButton 
+{font-family: 'Monda', tahoma, arial, sans-serif;width:250px;display:block;background:#EEE; border:1px solid #AAA; color:#333; margin:15px auto;padding:5px 15px; cursor:pointer; text-transform:uppercase; font-size:0.8em;}
+#LoginButton:hover
+{background:#DDD; border:1px solid #06F;}
+#usrFeedback 
+{margin:auto; font-size:0.8em;}
+.loadingFB 
+{color: #999;background: url('../images/loading.gif') no-repeat top left;padding-left: 16px;}
+.errorFB 
+{color: #F03;background: none; margin:auto; text-align:center;}
+.infoFB 
+{color: green;}
+.content p 
+{margin: 7px 0 13px;}
+.shortcuts 
+{border-top: 1px dashed #FFF;margin-top: 10px;padding: 10px 0 0;}
+.content input 
+{font-size: 14px;}
+.companylogo 
+{margin: 0 0 30px;text-align:center}
+.content h1 
+{font-size: 1em;font-weight: bold;margin: 0 0 10px 0;}
+.content span 
+{font-size: 0.8em;}
+.mandatory:after
+{color:#F03;content:"*";}
+#footer
+{display:block; text-align:center; font-size:0.7em; text-transform:uppercase; color:#CCC; margin:5px auto;}
+#wallpaper
+{width:100%; height:100%; position:fixed; z-index:-100; margin:auto;}

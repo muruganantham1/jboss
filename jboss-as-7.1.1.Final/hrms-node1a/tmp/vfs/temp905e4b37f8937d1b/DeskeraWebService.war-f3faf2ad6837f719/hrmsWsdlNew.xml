@@ -1,0 +1,1320 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="DeskeraWebService" targetNamespace="services.deskera.xm.com" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="services.deskera.xm.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="services.deskera.xm.com" version="1.0" xmlns:tns="services.deskera.xm.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="addFavouriteProjects" type="tns:addFavouriteProjects"/>
+<xs:element name="addFavouriteProjectsResponse" type="tns:addFavouriteProjectsResponse"/>
+<xs:element name="approveEmployeesTimesheet" type="tns:approveEmployeesTimesheet"/>
+<xs:element name="approveEmployeesTimesheetResponse" type="tns:approveEmployeesTimesheetResponse"/>
+<xs:element name="approveEmployeesTimesheetWeekly" type="tns:approveEmployeesTimesheetWeekly"/>
+<xs:element name="approveEmployeesTimesheetWeeklyResponse" type="tns:approveEmployeesTimesheetWeeklyResponse"/>
+<xs:element name="createActivities" type="tns:createActivities"/>
+<xs:element name="createActivitiesResponse" type="tns:createActivitiesResponse"/>
+<xs:element name="createProject" type="tns:createProject"/>
+<xs:element name="createProjectResponse" type="tns:createProjectResponse"/>
+<xs:element name="deleteActivities" type="tns:deleteActivities"/>
+<xs:element name="deleteActivitiesResponse" type="tns:deleteActivitiesResponse"/>
+<xs:element name="deleteFavouriteProjects" type="tns:deleteFavouriteProjects"/>
+<xs:element name="deleteFavouriteProjectsResponse" type="tns:deleteFavouriteProjectsResponse"/>
+<xs:element name="deleteProject" type="tns:deleteProject"/>
+<xs:element name="deleteProjectResponse" type="tns:deleteProjectResponse"/>
+<xs:element name="editActivities" type="tns:editActivities"/>
+<xs:element name="editActivitiesResponse" type="tns:editActivitiesResponse"/>
+<xs:element name="editProject" type="tns:editProject"/>
+<xs:element name="editProjectResponse" type="tns:editProjectResponse"/>
+<xs:element name="getAllTeamMembers" type="tns:getAllTeamMembers"/>
+<xs:element name="getAllTeamMembersResponse" type="tns:getAllTeamMembersResponse"/>
+<xs:element name="getEmployeeDetails" type="tns:getEmployeeDetails"/>
+<xs:element name="getEmployeeDetailsResponse" type="tns:getEmployeeDetailsResponse"/>
+<xs:element name="getManagerOfEmployee" type="tns:getManagerOfEmployee"/>
+<xs:element name="getManagerOfEmployeeResponse" type="tns:getManagerOfEmployeeResponse"/>
+<xs:element name="getPendingApprovalEmployeeList" type="tns:getPendingApprovalEmployeeList"/>
+<xs:element name="getPendingApprovalEmployeeListResponse" type="tns:getPendingApprovalEmployeeListResponse"/>
+<xs:element name="rejectEmployeesTimesheet" type="tns:rejectEmployeesTimesheet"/>
+<xs:element name="rejectEmployeesTimesheetResponse" type="tns:rejectEmployeesTimesheetResponse"/>
+<xs:element name="rejectEmployeesTimesheetWeekly" type="tns:rejectEmployeesTimesheetWeekly"/>
+<xs:element name="rejectEmployeesTimesheetWeeklyResponse" type="tns:rejectEmployeesTimesheetWeeklyResponse"/>
+<xs:element name="saveTimesheet" type="tns:saveTimesheet"/>
+<xs:element name="saveTimesheetResponse" type="tns:saveTimesheetResponse"/>
+<xs:element name="submitTimesheet" type="tns:submitTimesheet"/>
+<xs:element name="submitTimesheetResponse" type="tns:submitTimesheetResponse"/>
+<xs:element name="viewActivitie" type="tns:viewActivitie"/>
+<xs:element name="viewActivitieResponse" type="tns:viewActivitieResponse"/>
+<xs:element name="viewAllActivities" type="tns:viewAllActivities"/>
+<xs:element name="viewAllActivitiesResponse" type="tns:viewAllActivitiesResponse"/>
+<xs:element name="viewAllProjects" type="tns:viewAllProjects"/>
+<xs:element name="viewAllProjectsResponse" type="tns:viewAllProjectsResponse"/>
+<xs:element name="viewListOfFavouriteActivities" type="tns:viewListOfFavouriteActivities"/>
+<xs:element name="viewListOfFavouriteActivitiesResponse" type="tns:viewListOfFavouriteActivitiesResponse"/>
+<xs:element name="viewListOfFavouriteProjects" type="tns:viewListOfFavouriteProjects"/>
+<xs:element name="viewListOfFavouriteProjectsResponse" type="tns:viewListOfFavouriteProjectsResponse"/>
+<xs:element name="viewTimesheet" type="tns:viewTimesheet"/>
+<xs:element name="viewTimesheetReport" type="tns:viewTimesheetReport"/>
+<xs:element name="viewTimesheetReportResponse" type="tns:viewTimesheetReportResponse"/>
+<xs:element name="viewTimesheetResponse" type="tns:viewTimesheetResponse"/>
+<xs:element name="viewTimesheetSummaryReport" type="tns:viewTimesheetSummaryReport"/>
+<xs:element name="viewTimesheetSummaryReportResponse" type="tns:viewTimesheetSummaryReportResponse"/>
+<xs:complexType name="getManagerOfEmployee">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="userRequest" type="tns:request"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="request">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="environment" type="xs:string"/>
+      <xs:element minOccurs="0" name="orgId" type="xs:string"/>
+      <xs:element minOccurs="0" name="requestId" type="xs:string"/>
+      <xs:element minOccurs="0" name="source" type="xs:string"/>
+      <xs:element minOccurs="0" name="userId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getManagerOfEmployeeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="reportingManagerResponse" type="tns:reportingManagerResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="reportingManagerResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="manager" type="tns:user"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="response">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorMsg" type="xs:string"/>
+      <xs:element minOccurs="0" name="responseCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="responseId" type="xs:string"/>
+      <xs:element minOccurs="0" name="userId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="user">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="emailid" type="xs:string"/>
+      <xs:element minOccurs="0" name="fname" type="xs:string"/>
+      <xs:element minOccurs="0" name="lname" type="xs:string"/>
+      <xs:element minOccurs="0" name="userid" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="editActivities">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="editActivitieRequest" type="tns:editActivitieRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="editActivitieRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="workPackageCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="workPackageId" type="xs:string"/>
+          <xs:element minOccurs="0" name="workPackageName" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="editActivitiesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activitieResponse" type="tns:activitieResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="activitieResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="workPackage" type="tns:workPackageAll"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="workPackageAll">
+    <xs:complexContent>
+      <xs:extension base="tns:workPackage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="workPackageCode" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="workPackage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="workPackageId" type="xs:string"/>
+      <xs:element minOccurs="0" name="workPackageName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="submitTimesheet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="submitTimeSheetRequest" type="tns:saveTimeSheetRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="saveTimeSheetRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="timeSheet" nillable="true" type="tns:saveTimeSheet"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="saveTimeSheet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:string"/>
+      <xs:element minOccurs="0" name="projectId" type="xs:string"/>
+      <xs:element minOccurs="0" name="timesheetId" type="xs:string"/>
+      <xs:element minOccurs="0" name="workPackageId" type="xs:string"/>
+      <xs:element minOccurs="0" name="workTime" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="submitTimesheetResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="submitTimeSheetResponse" type="tns:response"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="createProject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="createProjectRequest" type="tns:createProjectRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="createProjectRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="billableUnder" type="xs:string"/>
+          <xs:element minOccurs="0" name="projectCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="projectName" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="createProjectResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="projectResponse" type="tns:projectResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="projectResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="project" type="tns:projectAll"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="projectAll">
+    <xs:complexContent>
+      <xs:extension base="tns:projects">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="projects">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="billableUnder" type="xs:string"/>
+      <xs:element minOccurs="0" name="projectCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="projectId" type="xs:string"/>
+      <xs:element minOccurs="0" name="projectName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="approveEmployeesTimesheet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="approveEmployeesTimesheetRequest" type="tns:approveRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="approveRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="timesheetId" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="approveEmployeesTimesheetResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="approveEmployeesTimesheetResponse" type="tns:response"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="createActivities">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="createActivitieRequest" type="tns:createActivitieRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="createActivitieRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="workPackageCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="workPackageName" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="createActivitiesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activitieResponse" type="tns:activitieResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewAllProjects">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="userRequest" type="tns:request"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewAllProjectsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="projectsResponse" type="tns:projectsResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="projectsResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="projects" nillable="true" type="tns:projects"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="deleteActivities">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="deleteActivitieRequest" type="tns:deleteActivitieRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="deleteActivitieRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="workPackageId" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="deleteActivitiesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activitieResponse" type="tns:activitieResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewTimesheetSummaryReport">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="timeSheetSummaryReportRequest" type="tns:timeSheetReportRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="timeSheetReportRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="emplyeesUserId" type="xs:string"/>
+          <xs:element minOccurs="0" name="fromDate" type="xs:string"/>
+          <xs:element minOccurs="0" name="projectId" type="xs:string"/>
+          <xs:element minOccurs="0" name="toDate" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="viewTimesheetSummaryReportResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TimesheetSummaryReportResponse" type="tns:timeSheetSummaryResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="timeSheetSummaryResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="timeSheetSummary" nillable="true" type="tns:timeSheetSummary"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="timeSheetSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="employeeName" type="xs:string"/>
+      <xs:element minOccurs="0" name="workingHours" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="rejectEmployeesTimesheetWeekly">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="rejectEmployeesTimesheetWeeklyRequest" type="tns:timeSheetApproveWeeklyRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="timeSheetApproveWeeklyRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="emplyeesUserId" type="xs:string"/>
+          <xs:element minOccurs="0" name="fromDate" type="xs:string"/>
+          <xs:element minOccurs="0" name="toDate" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="rejectEmployeesTimesheetWeeklyResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="rejectEmployeesTimesheetWeeklyResponse" type="tns:response"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewListOfFavouriteProjects">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="favouriteProjectsRequest" type="tns:request"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewListOfFavouriteProjectsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="favouriteProjectsResponse" type="tns:favouriteProjectsResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="favouriteProjectsResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="favouriteProjects" nillable="true" type="tns:favouriteProjects"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="favouriteProjects">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="favouriteId" type="xs:string"/>
+      <xs:element minOccurs="0" name="projectId" type="xs:string"/>
+      <xs:element minOccurs="0" name="projectName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewTimesheetReport">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="timeSheetReportRequest" type="tns:timeSheetReportRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewTimesheetReportResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="timeSheetReportResponse" type="tns:timeSheetReportResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="timeSheetReportResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="timeSheet" nillable="true" type="tns:timeSheetReport"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="timeSheetReport">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:string"/>
+      <xs:element minOccurs="0" name="employeeName" type="xs:string"/>
+      <xs:element minOccurs="0" name="employeeUserId" type="xs:string"/>
+      <xs:element minOccurs="0" name="isApproved" type="xs:string"/>
+      <xs:element minOccurs="0" name="isSubmitted" type="xs:string"/>
+      <xs:element minOccurs="0" name="projectId" type="xs:string"/>
+      <xs:element minOccurs="0" name="projectName" type="xs:string"/>
+      <xs:element minOccurs="0" name="timesheetId" type="xs:string"/>
+      <xs:element minOccurs="0" name="workPackageId" type="xs:string"/>
+      <xs:element minOccurs="0" name="workPackageName" type="xs:string"/>
+      <xs:element minOccurs="0" name="workTime" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewAllActivities">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="userRequest" type="tns:request"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewAllActivitiesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activitiesResponse" type="tns:activitiesResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="activitiesResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="workPackage" nillable="true" type="tns:workPackage"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="deleteProject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="deleteProjectRequest" type="tns:deleteProjectRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="deleteProjectRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="projectId" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="deleteProjectResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="projectResponse" type="tns:projectResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getAllTeamMembers">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="userRequest" type="tns:request"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getAllTeamMembersResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="teamMembersResponse" type="tns:teamMembersResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="teamMembersResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="teamMembers" nillable="true" type="tns:user"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="viewTimesheet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="timeSheetRequest" type="tns:timeSheetRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="timeSheetRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fromDate" type="xs:string"/>
+          <xs:element minOccurs="0" name="toDate" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="viewTimesheetResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="timeSheetResponse" type="tns:timeSheetResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="timeSheetResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="timeSheet" nillable="true" type="tns:timeSheet"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="timeSheet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:string"/>
+      <xs:element minOccurs="0" name="employeeUserId" type="xs:string"/>
+      <xs:element minOccurs="0" name="isApproved" type="xs:string"/>
+      <xs:element minOccurs="0" name="isSubmitted" type="xs:string"/>
+      <xs:element minOccurs="0" name="projectId" type="xs:string"/>
+      <xs:element minOccurs="0" name="projectName" type="xs:string"/>
+      <xs:element minOccurs="0" name="timesheetId" type="xs:string"/>
+      <xs:element minOccurs="0" name="workPackageId" type="xs:string"/>
+      <xs:element minOccurs="0" name="workPackageName" type="xs:string"/>
+      <xs:element minOccurs="0" name="workTime" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getPendingApprovalEmployeeList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="pendingApprovalEmployeeRequest" type="tns:request"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getPendingApprovalEmployeeListResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="pendingApprovalEmployeeResponse" type="tns:employeePendingApprovalWeekResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="employeePendingApprovalWeekResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="employee" nillable="true" type="tns:employeePendingApprovalWeek"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="employeePendingApprovalWeek">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="employeeUserId" type="xs:string"/>
+      <xs:element minOccurs="0" name="fname" type="xs:string"/>
+      <xs:element minOccurs="0" name="lname" type="xs:string"/>
+      <xs:element minOccurs="0" name="weekEnd" type="xs:string"/>
+      <xs:element minOccurs="0" name="weekStart" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="editProject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="editProjectRequest" type="tns:editProjectRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="editProjectRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="billableUnder" type="xs:string"/>
+          <xs:element minOccurs="0" name="projectCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="projectId" type="xs:string"/>
+          <xs:element minOccurs="0" name="projectName" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="editProjectResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="projectResponse" type="tns:projectResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="rejectEmployeesTimesheet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="rejectEmployeesTimesheetRequest" type="tns:approveRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="rejectEmployeesTimesheetResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="rejectEmployeesTimesheetResponse" type="tns:response"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="saveTimesheet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="saveTimeSheetRequest" type="tns:saveTimeSheetRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="saveTimesheetResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="saveTimeSheetResponse" type="tns:response"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="addFavouriteProjects">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="addFavouriteProjectsRequest" type="tns:addFavouriteProjectsRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="addFavouriteProjectsRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="projectId" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="addFavouriteProjectsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="addFavouriteProjectsResponse" type="tns:response"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewListOfFavouriteActivities">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="favouriteActivitiesRequest" type="tns:request"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewListOfFavouriteActivitiesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="favouriteActivitiesResponse" type="tns:favouriteActivitiesResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="favouriteActivitiesResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="favouriteWorkPackage" nillable="true" type="tns:favouriteWorkPackage"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="favouriteWorkPackage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="favouriteId" type="xs:string"/>
+      <xs:element minOccurs="0" name="workPackageId" type="xs:string"/>
+      <xs:element minOccurs="0" name="workPackageName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getEmployeeDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="userRequest" type="tns:request"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getEmployeeDetailsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="employeeDetailsResponse" type="tns:employeeDetailsResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="employeeDetailsResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="employee" type="tns:employee"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="employee">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contactNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="department" type="xs:string"/>
+      <xs:element minOccurs="0" name="emailId" type="xs:string"/>
+      <xs:element minOccurs="0" name="employeeId" type="xs:string"/>
+      <xs:element minOccurs="0" name="fname" type="xs:string"/>
+      <xs:element minOccurs="0" name="lname" type="xs:string"/>
+      <xs:element minOccurs="0" name="reportingManagerFname" type="xs:string"/>
+      <xs:element minOccurs="0" name="reportingManagerId" type="xs:string"/>
+      <xs:element minOccurs="0" name="reportingManagerLname" type="xs:string"/>
+      <xs:element minOccurs="0" name="role" type="xs:string"/>
+      <xs:element minOccurs="0" name="userid" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="deleteFavouriteProjects">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="deleteFavouriteProjectsRequest" type="tns:deleteFavouriteProjectsRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="deleteFavouriteProjectsRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="projectId" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="deleteFavouriteProjectsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="deleteFavouriteProjectsResponse" type="tns:response"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="approveEmployeesTimesheetWeekly">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="approveEmployeesTimesheetWeeklyRequest" type="tns:timeSheetApproveWeeklyRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="approveEmployeesTimesheetWeeklyResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="approveEmployeesTimesheetWeeklyResponse" type="tns:response"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="viewActivitie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="userRequest" type="tns:activitieRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="activitieRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="workPackageId" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="viewActivitieResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activitieResponse" type="tns:activitieResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="viewTimesheetReportResponse">
+    <wsdl:part element="tns:viewTimesheetReportResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createActivities">
+    <wsdl:part element="tns:createActivities" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="rejectEmployeesTimesheetResponse">
+    <wsdl:part element="tns:rejectEmployeesTimesheetResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createActivitiesResponse">
+    <wsdl:part element="tns:createActivitiesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewActivitieResponse">
+    <wsdl:part element="tns:viewActivitieResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="approveEmployeesTimesheetWeekly">
+    <wsdl:part element="tns:approveEmployeesTimesheetWeekly" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="editProject">
+    <wsdl:part element="tns:editProject" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getManagerOfEmployeeResponse">
+    <wsdl:part element="tns:getManagerOfEmployeeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getManagerOfEmployee">
+    <wsdl:part element="tns:getManagerOfEmployee" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="approveEmployeesTimesheetWeeklyResponse">
+    <wsdl:part element="tns:approveEmployeesTimesheetWeeklyResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteProjectResponse">
+    <wsdl:part element="tns:deleteProjectResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllTeamMembers">
+    <wsdl:part element="tns:getAllTeamMembers" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPendingApprovalEmployeeListResponse">
+    <wsdl:part element="tns:getPendingApprovalEmployeeListResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="rejectEmployeesTimesheet">
+    <wsdl:part element="tns:rejectEmployeesTimesheet" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="submitTimesheet">
+    <wsdl:part element="tns:submitTimesheet" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewAllProjectsResponse">
+    <wsdl:part element="tns:viewAllProjectsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="rejectEmployeesTimesheetWeekly">
+    <wsdl:part element="tns:rejectEmployeesTimesheetWeekly" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveTimesheetResponse">
+    <wsdl:part element="tns:saveTimesheetResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewListOfFavouriteProjects">
+    <wsdl:part element="tns:viewListOfFavouriteProjects" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="approveEmployeesTimesheetResponse">
+    <wsdl:part element="tns:approveEmployeesTimesheetResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewListOfFavouriteProjectsResponse">
+    <wsdl:part element="tns:viewListOfFavouriteProjectsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteActivities">
+    <wsdl:part element="tns:deleteActivities" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewAllProjects">
+    <wsdl:part element="tns:viewAllProjects" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewTimesheetSummaryReport">
+    <wsdl:part element="tns:viewTimesheetSummaryReport" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="editActivities">
+    <wsdl:part element="tns:editActivities" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllTeamMembersResponse">
+    <wsdl:part element="tns:getAllTeamMembersResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewTimesheetResponse">
+    <wsdl:part element="tns:viewTimesheetResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="editProjectResponse">
+    <wsdl:part element="tns:editProjectResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewTimesheet">
+    <wsdl:part element="tns:viewTimesheet" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPendingApprovalEmployeeList">
+    <wsdl:part element="tns:getPendingApprovalEmployeeList" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewListOfFavouriteActivitiesResponse">
+    <wsdl:part element="tns:viewListOfFavouriteActivitiesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewActivitie">
+    <wsdl:part element="tns:viewActivitie" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createProjectResponse">
+    <wsdl:part element="tns:createProjectResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="approveEmployeesTimesheet">
+    <wsdl:part element="tns:approveEmployeesTimesheet" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteFavouriteProjectsResponse">
+    <wsdl:part element="tns:deleteFavouriteProjectsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewTimesheetReport">
+    <wsdl:part element="tns:viewTimesheetReport" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createProject">
+    <wsdl:part element="tns:createProject" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewAllActivitiesResponse">
+    <wsdl:part element="tns:viewAllActivitiesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteActivitiesResponse">
+    <wsdl:part element="tns:deleteActivitiesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addFavouriteProjects">
+    <wsdl:part element="tns:addFavouriteProjects" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEmployeeDetailsResponse">
+    <wsdl:part element="tns:getEmployeeDetailsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveTimesheet">
+    <wsdl:part element="tns:saveTimesheet" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteFavouriteProjects">
+    <wsdl:part element="tns:deleteFavouriteProjects" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewAllActivities">
+    <wsdl:part element="tns:viewAllActivities" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEmployeeDetails">
+    <wsdl:part element="tns:getEmployeeDetails" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="rejectEmployeesTimesheetWeeklyResponse">
+    <wsdl:part element="tns:rejectEmployeesTimesheetWeeklyResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="editActivitiesResponse">
+    <wsdl:part element="tns:editActivitiesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteProject">
+    <wsdl:part element="tns:deleteProject" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addFavouriteProjectsResponse">
+    <wsdl:part element="tns:addFavouriteProjectsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewTimesheetSummaryReportResponse">
+    <wsdl:part element="tns:viewTimesheetSummaryReportResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="viewListOfFavouriteActivities">
+    <wsdl:part element="tns:viewListOfFavouriteActivities" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="submitTimesheetResponse">
+    <wsdl:part element="tns:submitTimesheetResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="DeskeraWebServiceImpl">
+    <wsdl:operation name="getManagerOfEmployee">
+      <wsdl:input message="tns:getManagerOfEmployee" name="getManagerOfEmployee">
+    </wsdl:input>
+      <wsdl:output message="tns:getManagerOfEmployeeResponse" name="getManagerOfEmployeeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editActivities">
+      <wsdl:input message="tns:editActivities" name="editActivities">
+    </wsdl:input>
+      <wsdl:output message="tns:editActivitiesResponse" name="editActivitiesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="submitTimesheet">
+      <wsdl:input message="tns:submitTimesheet" name="submitTimesheet">
+    </wsdl:input>
+      <wsdl:output message="tns:submitTimesheetResponse" name="submitTimesheetResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createProject">
+      <wsdl:input message="tns:createProject" name="createProject">
+    </wsdl:input>
+      <wsdl:output message="tns:createProjectResponse" name="createProjectResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="approveEmployeesTimesheet">
+      <wsdl:input message="tns:approveEmployeesTimesheet" name="approveEmployeesTimesheet">
+    </wsdl:input>
+      <wsdl:output message="tns:approveEmployeesTimesheetResponse" name="approveEmployeesTimesheetResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createActivities">
+      <wsdl:input message="tns:createActivities" name="createActivities">
+    </wsdl:input>
+      <wsdl:output message="tns:createActivitiesResponse" name="createActivitiesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewAllProjects">
+      <wsdl:input message="tns:viewAllProjects" name="viewAllProjects">
+    </wsdl:input>
+      <wsdl:output message="tns:viewAllProjectsResponse" name="viewAllProjectsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteActivities">
+      <wsdl:input message="tns:deleteActivities" name="deleteActivities">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteActivitiesResponse" name="deleteActivitiesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewTimesheetSummaryReport">
+      <wsdl:input message="tns:viewTimesheetSummaryReport" name="viewTimesheetSummaryReport">
+    </wsdl:input>
+      <wsdl:output message="tns:viewTimesheetSummaryReportResponse" name="viewTimesheetSummaryReportResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rejectEmployeesTimesheetWeekly">
+      <wsdl:input message="tns:rejectEmployeesTimesheetWeekly" name="rejectEmployeesTimesheetWeekly">
+    </wsdl:input>
+      <wsdl:output message="tns:rejectEmployeesTimesheetWeeklyResponse" name="rejectEmployeesTimesheetWeeklyResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewListOfFavouriteProjects">
+      <wsdl:input message="tns:viewListOfFavouriteProjects" name="viewListOfFavouriteProjects">
+    </wsdl:input>
+      <wsdl:output message="tns:viewListOfFavouriteProjectsResponse" name="viewListOfFavouriteProjectsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewTimesheetReport">
+      <wsdl:input message="tns:viewTimesheetReport" name="viewTimesheetReport">
+    </wsdl:input>
+      <wsdl:output message="tns:viewTimesheetReportResponse" name="viewTimesheetReportResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewAllActivities">
+      <wsdl:input message="tns:viewAllActivities" name="viewAllActivities">
+    </wsdl:input>
+      <wsdl:output message="tns:viewAllActivitiesResponse" name="viewAllActivitiesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProject">
+      <wsdl:input message="tns:deleteProject" name="deleteProject">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteProjectResponse" name="deleteProjectResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllTeamMembers">
+      <wsdl:input message="tns:getAllTeamMembers" name="getAllTeamMembers">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllTeamMembersResponse" name="getAllTeamMembersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewTimesheet">
+      <wsdl:input message="tns:viewTimesheet" name="viewTimesheet">
+    </wsdl:input>
+      <wsdl:output message="tns:viewTimesheetResponse" name="viewTimesheetResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPendingApprovalEmployeeList">
+      <wsdl:input message="tns:getPendingApprovalEmployeeList" name="getPendingApprovalEmployeeList">
+    </wsdl:input>
+      <wsdl:output message="tns:getPendingApprovalEmployeeListResponse" name="getPendingApprovalEmployeeListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editProject">
+      <wsdl:input message="tns:editProject" name="editProject">
+    </wsdl:input>
+      <wsdl:output message="tns:editProjectResponse" name="editProjectResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rejectEmployeesTimesheet">
+      <wsdl:input message="tns:rejectEmployeesTimesheet" name="rejectEmployeesTimesheet">
+    </wsdl:input>
+      <wsdl:output message="tns:rejectEmployeesTimesheetResponse" name="rejectEmployeesTimesheetResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveTimesheet">
+      <wsdl:input message="tns:saveTimesheet" name="saveTimesheet">
+    </wsdl:input>
+      <wsdl:output message="tns:saveTimesheetResponse" name="saveTimesheetResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addFavouriteProjects">
+      <wsdl:input message="tns:addFavouriteProjects" name="addFavouriteProjects">
+    </wsdl:input>
+      <wsdl:output message="tns:addFavouriteProjectsResponse" name="addFavouriteProjectsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewListOfFavouriteActivities">
+      <wsdl:input message="tns:viewListOfFavouriteActivities" name="viewListOfFavouriteActivities">
+    </wsdl:input>
+      <wsdl:output message="tns:viewListOfFavouriteActivitiesResponse" name="viewListOfFavouriteActivitiesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEmployeeDetails">
+      <wsdl:input message="tns:getEmployeeDetails" name="getEmployeeDetails">
+    </wsdl:input>
+      <wsdl:output message="tns:getEmployeeDetailsResponse" name="getEmployeeDetailsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteFavouriteProjects">
+      <wsdl:input message="tns:deleteFavouriteProjects" name="deleteFavouriteProjects">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteFavouriteProjectsResponse" name="deleteFavouriteProjectsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="approveEmployeesTimesheetWeekly">
+      <wsdl:input message="tns:approveEmployeesTimesheetWeekly" name="approveEmployeesTimesheetWeekly">
+    </wsdl:input>
+      <wsdl:output message="tns:approveEmployeesTimesheetWeeklyResponse" name="approveEmployeesTimesheetWeeklyResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewActivitie">
+      <wsdl:input message="tns:viewActivitie" name="viewActivitie">
+    </wsdl:input>
+      <wsdl:output message="tns:viewActivitieResponse" name="viewActivitieResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DeskeraWebServiceSoapBinding" type="tns:DeskeraWebServiceImpl">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getManagerOfEmployee">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getManagerOfEmployee">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getManagerOfEmployeeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editActivities">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="editActivities">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="editActivitiesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="submitTimesheet">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="submitTimesheet">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="submitTimesheetResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createProject">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createProject">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createProjectResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="approveEmployeesTimesheet">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="approveEmployeesTimesheet">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="approveEmployeesTimesheetResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createActivities">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createActivities">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createActivitiesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewAllProjects">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="viewAllProjects">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="viewAllProjectsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteActivities">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteActivities">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteActivitiesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewTimesheetSummaryReport">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="viewTimesheetSummaryReport">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="viewTimesheetSummaryReportResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rejectEmployeesTimesheetWeekly">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="rejectEmployeesTimesheetWeekly">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="rejectEmployeesTimesheetWeeklyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewListOfFavouriteProjects">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="viewListOfFavouriteProjects">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="viewListOfFavouriteProjectsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewAllActivities">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="viewAllActivities">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="viewAllActivitiesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewTimesheetReport">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="viewTimesheetReport">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="viewTimesheetReportResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProject">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteProject">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteProjectResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllTeamMembers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAllTeamMembers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllTeamMembersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPendingApprovalEmployeeList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getPendingApprovalEmployeeList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPendingApprovalEmployeeListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewTimesheet">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="viewTimesheet">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="viewTimesheetResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editProject">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="editProject">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="editProjectResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rejectEmployeesTimesheet">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="rejectEmployeesTimesheet">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="rejectEmployeesTimesheetResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveTimesheet">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveTimesheet">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveTimesheetResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addFavouriteProjects">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addFavouriteProjects">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addFavouriteProjectsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEmployeeDetails">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getEmployeeDetails">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getEmployeeDetailsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewListOfFavouriteActivities">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="viewListOfFavouriteActivities">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="viewListOfFavouriteActivitiesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteFavouriteProjects">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteFavouriteProjects">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteFavouriteProjectsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="approveEmployeesTimesheetWeekly">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="approveEmployeesTimesheetWeekly">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="approveEmployeesTimesheetWeeklyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewActivitie">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="viewActivitie">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="viewActivitieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DeskeraWebService">
+    <wsdl:port binding="tns:DeskeraWebServiceSoapBinding" name="DeskeraWebService">
+      <soap:address location="https://timesheet.ytlcomms.my/deskeraServices/DeskeraWebService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
