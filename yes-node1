@@ -1,0 +1,27 @@
+#!/bin/bash  
+
+[ -r /etc/profile.d/java.sh ] && . /etc/profile.d/java.sh  
+[ -r /etc/profile.d/jboss.sh ] && . /etc/profile.d/jboss.sh  
+  
+JBOSS_HOME=/opt/jboss/jboss-eap-6.4  
+#EAP6_OPTS="$EAP6_OPTS -Djboss.socket.binding.port-offset=100"
+EAP6_OPTS="$EAP6_OPTS -Djboss.server.base.dir=/opt/jboss/jboss-eap-6.4/yes-node1"
+EAP6_OPTS="$EAP6_OPTS -Djboss.bind.address.management=0.0.0.0"  
+EAP6_OPTS="$EAP6_OPTS -Djboss.bind.address=0.0.0.0"  
+EAP6_OPTS="$EAP6_OPTS -Dorg.jboss.as.logging.per-deployment=false"  
+EAP6_OPTS="$EAP6_OPTS -Djboss.node.name=yes-node1"
+EAP6_OPTS="$EAP6_OPTS -Djboss.socket.binding.port-offset=100"
+case "$1" in  
+    start)  
+        echo "Starting JBoss eap 6.4 ..."  
+        ${JBOSS_HOME}/bin/standalone.sh -c standalone-ha.xml $EAP6_OPTS &  
+       ;;  
+    stop)  
+        echo "Stopping JBoss EAP6.4 ..."  
+        $JBOSS_HOME/bin/jboss-cli.sh --connect --controller=localhost:10099  --command=":shutdown()" 
+    ;;  
+    *)  
+        echo "Usage: /etc/init.d/jbosseap6.2 {start|stop}"; exit 1;  
+    ;;  
+esac  
+exit 0
